@@ -7,7 +7,9 @@ function App() {
   //アプリコンテスト用に質問掲示板を作成する
   return (
     <BrowserRouter>
-      <Route path={`/`} element={<Home />} />
+      <Routes>
+        <Route path={`/`} element={<Home />} />
+      </Routes>
     </BrowserRouter>
   );
 }

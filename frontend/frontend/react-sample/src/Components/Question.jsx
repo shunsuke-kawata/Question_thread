@@ -7,9 +7,8 @@ const Question = ({ id, title, body, setDetailsFlag }) => {
   };
   return (
     <div className="question_body" onClick={showDetails}>
-      <h4>
-        {id},{title}
-      </h4>
+      <h4>{id}</h4>
+      <p>{title}</p>
       <p>{body}</p>
     </div>
   );

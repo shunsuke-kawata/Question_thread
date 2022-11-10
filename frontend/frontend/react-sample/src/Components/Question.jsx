@@ -1,12 +1,12 @@
 import React from "react";
 import "../css/Question.css";
 
-const Question = ({ id, title, body }) => {
-  const transition = () => {
-    console.log(id);
+const Question = ({ id, title, body, setDetailsFlag }) => {
+  const showDetails = () => {
+    setDetailsFlag(true);
   };
   return (
-    <div className="question_body" onClick={transition}>
+    <div className="question_body" onClick={showDetails}>
       <h4>
         {id},{title}
       </h4>

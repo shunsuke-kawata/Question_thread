@@ -1,7 +1,7 @@
 import React from "react";
 import Question from "./Question";
 
-const QuestionArea = ({ index, data }) => {
+const QuestionArea = ({ index, data, setDetailsFlag }) => {
   //配列の長さを保持する
 
   var display_head = (index - 1) * 10;
@@ -16,7 +16,9 @@ const QuestionArea = ({ index, data }) => {
 
   if (!display_data) return <></>;
 
-  return display_data.map((datum) => <Question {...datum} key={datum.id} />);
+  return display_data.map((datum) => (
+    <Question {...datum} key={datum.id} setDetailsFlag={setDetailsFlag} />
+  ));
 };
 
 export default QuestionArea;

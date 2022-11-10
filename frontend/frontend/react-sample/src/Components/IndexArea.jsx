@@ -1,3 +1,5 @@
+import { HStack } from "@chakra-ui/react";
+
 const IndexArea = ({ index, data, setIndex }) => {
   const changeIndex = (delta) => {
     var max = Math.floor(data.length / 10);
@@ -16,9 +18,11 @@ const IndexArea = ({ index, data, setIndex }) => {
 
   return (
     <>
-      <button onClick={() => changeIndex(1)}>+</button>
-      <p>{index}ページ</p>
-      <button onClick={() => changeIndex(-1)}>-</button>
+      <HStack>
+        <button onClick={() => changeIndex(-1)}>-</button>
+        <p>{index}ページ</p>
+        <button onClick={() => changeIndex(1)}>+</button>
+      </HStack>
     </>
   );
 };

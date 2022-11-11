@@ -15,7 +15,6 @@ const Main = () => {
   const [menubarflag, setMenubarFlag] = useState(false);
   const data = dummyData;
 
-  //indexの状態を変更する関数
   return (
     <>
       <Header setMenubarFlag={setMenubarFlag} />

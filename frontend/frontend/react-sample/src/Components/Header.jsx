@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-const Header = ({ setTest }) => {
+const Header = ({ setMenubarFlag }) => {
   return (
     <div>
       <AppBar position="static">
@@ -17,7 +17,7 @@ const Header = ({ setTest }) => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={setTest}
+            onClick={() => setMenubarFlag(true)}
           >
             ＋
           </IconButton>

@@ -1,39 +1,14 @@
 import React from "react";
-import Sidebar from "react-sidebar";
 
-class Sample extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarOpen: true,
-    };
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
+const Menubar = ({ setMenubarFlag }) => {
+  return (
+    <>
+      <div className="menubar">
+        <p>表示</p>
+        <button onClick={() => setMenubarFlag(false)}>閉じる</button>
+      </div>
+    </>
+  );
+};
 
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
-
-  render() {
-    return (
-      <Sidebar
-        sidebar={
-          <div>
-            <b>サイドバー</b>
-            <br></br>
-            <b>サイドバー</b>
-          </div>
-        }
-        open={this.state.sidebarOpen}
-        onSetOpen={this.onSetSidebarOpen}
-        styles={{ sidebar: { background: "white" } }}
-      >
-        <button onClick={() => this.onSetSidebarOpen(true)}>
-          サイドーバーを開く
-        </button>
-      </Sidebar>
-    );
-  }
-}
-
-export default Sample;
+export default Menubar;

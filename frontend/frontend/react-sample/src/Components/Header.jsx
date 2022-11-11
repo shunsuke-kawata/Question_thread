@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-const Header = () => {
+const Header = ({ setTest }) => {
   return (
     <div>
       <AppBar position="static">
@@ -17,9 +17,11 @@ const Header = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={setTest}
           >
             ＋
           </IconButton>
+
           <Typography variant="h5" color="inherit" component="div">
             質問掲示板サイト
           </Typography>

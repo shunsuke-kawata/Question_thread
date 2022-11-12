@@ -23,7 +23,7 @@ const Header = ({ setMenubarFlag }) => {
           </IconButton>
 
           <Typography variant="h5" color="inherit" component="div">
-            プログラミング質問掲示板サイト
+            タイトル
           </Typography>
         </Toolbar>
       </AppBar>

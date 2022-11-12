@@ -13,7 +13,6 @@ const IndexArea = ({ index, data, setIndex }) => {
     } else {
       setIndex(index + delta);
     }
-    console.log(index);
   };
 
   return (

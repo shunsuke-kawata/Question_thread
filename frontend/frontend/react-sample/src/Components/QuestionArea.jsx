@@ -1,5 +1,6 @@
 import React from "react";
 import Question from "./Question";
+import "../css/QuestionArea.css";
 
 const QuestionArea = ({ index, data, setDetailsFlag }) => {
   //配列の長さを保持する

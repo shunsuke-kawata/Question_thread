@@ -1,5 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
+// import "../css/IndexArea.css";
+
 const IndexArea = ({ index, data, setIndex }) => {
   const changeIndex = (delta) => {
     var max = Math.floor(data.length / 10);
@@ -17,25 +19,27 @@ const IndexArea = ({ index, data, setIndex }) => {
 
   return (
     <>
-      <HStack>
-        <Button
-          variant="outline-primary"
-          className="mr-2"
-          onClick={() => changeIndex(-1)}
-        >
-          prev
-        </Button>
-        <div>
-          <p>{index}ページ</p>
-        </div>
-        <Button
-          variant="outline-primary"
-          className="mr-2"
-          onClick={() => changeIndex(1)}
-        >
-          next
-        </Button>
-      </HStack>
+      <div id="indexbar">
+        <HStack>
+          <Button
+            variant="outline-primary"
+            className="mr-2"
+            onClick={() => changeIndex(-1)}
+          >
+            prev
+          </Button>
+          <div>
+            <p>{index}ページ</p>
+          </div>
+          <Button
+            variant="outline-primary"
+            className="mr-2"
+            onClick={() => changeIndex(1)}
+          >
+            next
+          </Button>
+        </HStack>
+      </div>
     </>
   );
 };

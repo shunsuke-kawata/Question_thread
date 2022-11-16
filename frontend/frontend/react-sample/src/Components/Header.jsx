@@ -1,4 +1,4 @@
-import "../css/Title.css";
+import "../css/Header.css";
 import {
   AppBar,
   Toolbar,
@@ -10,7 +10,7 @@ import {
 const Header = ({ setMenubarFlag }) => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar variant="dense">
           <IconButton
             edge="start"

@@ -18,6 +18,7 @@ const Main = () => {
   return (
     <>
       <Header setMenubarFlag={setMenubarFlag} />
+      <Header setMenubarFlag={setMenubarFlag} />
       <Drawer
         anchor="left"
         open={menubarflag}

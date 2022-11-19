@@ -5,12 +5,13 @@ import {
   IconButton,
   Typography,
   Button,
+  Box,
 } from "@material-ui/core";
 
 const Header = ({ setMenubarFlag }) => {
   return (
-    <div>
-      <AppBar position="fixed">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar children="node" position="fixed">
         <Toolbar variant="dense">
           <IconButton
             edge="start"
@@ -27,7 +28,7 @@ const Header = ({ setMenubarFlag }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-    </div>
+    </Box>
   );
 };
 

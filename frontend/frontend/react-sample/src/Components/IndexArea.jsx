@@ -36,7 +36,7 @@ const IndexArea = ({ index, data, setIndex }) => {
             prev
           </Button>
 
-          <p>{indexString}ページ</p>
+          <h3>{indexString}ページ</h3>
 
           <Button
             id="nextbutton"

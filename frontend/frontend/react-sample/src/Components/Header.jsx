@@ -20,7 +20,7 @@ const Header = ({ setMenubarFlag }) => {
             sx={{ mr: 2 }}
             onClick={() => setMenubarFlag(true)}
           >
-            ＋
+            ≡
           </IconButton>
 
           <Typography variant="h5" color="inherit" component="div">

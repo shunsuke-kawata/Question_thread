@@ -24,7 +24,7 @@ const Header = ({ setMenubarFlag }) => {
           </IconButton>
 
           <Typography variant="h5" color="inherit" component="div">
-            タイトル
+            Question Thread
           </Typography>
         </Toolbar>
       </AppBar>

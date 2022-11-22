@@ -1,10 +1,10 @@
 import React from "react";
 import "../css/Question.css";
 
-const Question = ({ id, title, body, setDetailsFlag }) => {
+const Question = ({ id, title, body, setQuestionOrDetail }) => {
   const clickHandle = () => {
-    setDetailsFlag(true);
-    console.log(id, body, title);
+    setQuestionOrDetail(true);
+    console.log(id, title, body);
   };
   return (
     <div className="question_body" onClick={() => clickHandle()}>

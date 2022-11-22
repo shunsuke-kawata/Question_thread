@@ -5,14 +5,13 @@ import IndexArea from "./IndexArea";
 import dummyData from "../DummyDatas";
 import Details from "./Details";
 import { useState } from "react";
-import { HStack, VStack } from "@chakra-ui/react";
 import { Drawer } from "@material-ui/core";
 import Menubar from "./Menubar";
 
 const Main = () => {
   const [index, setIndex] = useState(1);
-  const [detailsflag, setDetailsFlag] = useState(false);
   const [menubarflag, setMenubarFlag] = useState(false);
+  const [questionOrDetail, setQuestionOrDetail] = useState(false);
   const data = dummyData;
 
   return (
@@ -29,8 +28,17 @@ const Main = () => {
         <Menubar setMenubarFlag={setMenubarFlag} />
       </Drawer>
       <IndexArea index={index} data={data} setIndex={setIndex} />
-      <Details detailsflag={detailsflag} setDetailsFlag={setDetailsFlag} />
-      <QuestionArea index={index} data={data} setDetailsFlag={setDetailsFlag} />
+
+      {/* 以下二つのどちらかを表示する */}
+      {questionOrDetail ? (
+        <Details setQuestionOrDetail={setQuestionOrDetail} />
+      ) : (
+        <QuestionArea
+          index={index}
+          data={data}
+          setQuestionOrDetail={setQuestionOrDetail}
+        />
+      )}
     </>
   );
 };

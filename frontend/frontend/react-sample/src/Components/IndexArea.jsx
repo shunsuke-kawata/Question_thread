@@ -28,16 +28,18 @@ const IndexArea = ({ index, data, setIndex }) => {
       <div id="indexbar">
         <Stack direction="row" spacing={5}>
           <Button
+            id="prevbutton"
             variant="outline-primary"
             className="mr-2"
             onClick={() => changeIndex(-1)}
           >
             prev
           </Button>
-          <div>
-            <p>{indexString}ページ</p>
-          </div>
+
+          <p>{indexString}ページ</p>
+
           <Button
+            id="nextbutton"
             variant="outline-primary"
             className="mr-2"
             onClick={() => changeIndex(1)}
@@ -45,7 +47,6 @@ const IndexArea = ({ index, data, setIndex }) => {
             next
           </Button>
         </Stack>
-        <div id="centerstack"></div>
       </div>
     </>
   );

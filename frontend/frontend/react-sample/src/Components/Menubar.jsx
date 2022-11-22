@@ -5,11 +5,11 @@ const Menubar = ({ setMenubarFlag }) => {
   return (
     <>
       <div className="menubar">
-        <p>Action</p>
-
-        <Link to="/newQuestion">質問を追加する</Link>
+        <h3 id="menutitle">Actions</h3>
+        <Link className="links" to="/newQuestion">
+          質問を追加する
+        </Link>
         <br />
-
         <button onClick={() => setMenubarFlag(false)}>閉じる</button>
       </div>
     </>

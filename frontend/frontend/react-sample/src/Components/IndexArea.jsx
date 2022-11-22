@@ -1,5 +1,5 @@
-import { HStack } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
+import { Stack } from "@mui/material";
 import "../css/IndexArea.css";
 
 const IndexArea = ({ index, data, setIndex }) => {
@@ -17,10 +17,16 @@ const IndexArea = ({ index, data, setIndex }) => {
     }
   };
 
+  let indexString = "";
+  if (index < 10) {
+    indexString += "0";
+  }
+  indexString += String(index);
+
   return (
     <>
       <div id="indexbar">
-        <div id="centerstack">
+        <Stack direction="row" spacing={5}>
           <Button
             variant="outline-primary"
             className="mr-2"
@@ -29,7 +35,7 @@ const IndexArea = ({ index, data, setIndex }) => {
             prev
           </Button>
           <div>
-            <p>{index}ページ</p>
+            <p>{indexString}ページ</p>
           </div>
           <Button
             variant="outline-primary"
@@ -38,7 +44,8 @@ const IndexArea = ({ index, data, setIndex }) => {
           >
             next
           </Button>
-        </div>
+        </Stack>
+        <div id="centerstack"></div>
       </div>
     </>
   );

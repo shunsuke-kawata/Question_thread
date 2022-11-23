@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import "../css/Signin.css";
 import { TextField, Stack, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import Common from "../Components/Common";
 
 const Signin = () => {
@@ -45,6 +46,9 @@ const Signin = () => {
           >
             サインイン
           </Button>
+          <Link className="links" to="/login">
+            すでにログイン済みの場合はこちら
+          </Link>
         </Stack>
       </div>
     </>

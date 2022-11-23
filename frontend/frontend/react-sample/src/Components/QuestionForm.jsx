@@ -17,7 +17,7 @@ const QuestionForm = () => {
   };
   return (
     <>
-      <div id="questionform">
+      <form id="questionform">
         <Stack className="questionStack" spacing={3}>
           <div id="titleBlock">
             <TextField
@@ -46,7 +46,7 @@ const QuestionForm = () => {
             投稿する
           </Button>
         </Stack>
-      </div>
+      </form>
     </>
   );
 };

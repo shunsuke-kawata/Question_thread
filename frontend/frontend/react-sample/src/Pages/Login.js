@@ -20,7 +20,7 @@ const Login = () => {
     <>
       <Common />
       <h2 id="loginTitle">ログイン</h2>
-      <div id="login">
+      <form id="login">
         <Stack spacing={3}>
           <TextField
             className="signinField"
@@ -49,7 +49,7 @@ const Login = () => {
           </Button>
           <Link to="/signin">サインインする</Link>
         </Stack>
-      </div>
+      </form>
     </>
   );
 };

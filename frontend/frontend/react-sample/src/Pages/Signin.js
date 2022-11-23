@@ -21,7 +21,7 @@ const Signin = () => {
     <>
       <Common />
       <h2 id="signinTitle">サインイン</h2>
-      <div id="signin">
+      <form id="signin">
         <Stack spacing={3}>
           <TextField
             className="signinField"
@@ -54,7 +54,7 @@ const Signin = () => {
           </Button>
           <Link to="/login">すでにログイン済みの場合はこちら</Link>
         </Stack>
-      </div>
+      </form>
     </>
   );
 };

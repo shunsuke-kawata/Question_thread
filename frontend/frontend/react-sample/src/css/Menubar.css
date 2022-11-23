@@ -6,12 +6,11 @@
 #menutitle{
     text-align: center;
 }
+
 a{
     color:inherit;
     text-decoration: none;
     color: #3f51b5;
-
-    
 }
 
 .a:focus{

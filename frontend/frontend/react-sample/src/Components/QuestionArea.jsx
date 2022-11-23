@@ -1,10 +1,12 @@
 import React from "react";
 import Question from "./Question";
+import { useState } from "react";
 import "../css/QuestionArea.css";
+import IndexArea from "./IndexArea";
 
-const QuestionArea = ({ index, data, setQuestionOrDetail }) => {
+const QuestionArea = ({ data, setQuestionOrDetail }) => {
   //配列の長さを保持する
-
+  const [index, setIndex] = useState(1);
   var display_head = (index - 1) * 10;
   var display_tail = display_head + 10;
   if (display_tail > data.length) {
@@ -24,7 +26,12 @@ const QuestionArea = ({ index, data, setQuestionOrDetail }) => {
     />
   ));
 
-  return <div id="mapdata">{map_data}</div>;
+  return (
+    <>
+      <IndexArea index={index} data={data} setIndex={setIndex} />
+      <div id="mapdata">{map_data}</div>
+    </>
+  );
 };
 
 export default QuestionArea;

@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/Menubar.css";
 
 const Menubar = ({ setMenubarFlag }) => {
@@ -9,7 +8,7 @@ const Menubar = ({ setMenubarFlag }) => {
       <div className="menubar">
         <h3 id="menutitle">Actions</h3>
         <Link className="links" to="/newQuestion">
-          質問を追加する
+          質問する
         </Link>
         <br />
         <Link className="links" to="/">

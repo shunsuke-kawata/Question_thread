@@ -12,7 +12,6 @@ const Main = () => {
   return (
     <>
       <Common />
-      {/* 以下二つのどちらかを表示する */}
       {questionOrDetail ? (
         <Details setQuestionOrDetail={setQuestionOrDetail} />
       ) : (

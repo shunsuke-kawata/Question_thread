@@ -11,7 +11,7 @@ const Signin = () => {
   return (
     <>
       <Common />
-      <h2 id="signinTitle">サインインページ</h2>
+      <h2 id="signinTitle">サインイン</h2>
       <div id="signin">
         <Stack spacing={3}>
           <TextField

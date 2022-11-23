@@ -4,7 +4,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
   Box,
 } from "@material-ui/core";
 

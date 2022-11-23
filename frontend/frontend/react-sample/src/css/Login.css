@@ -1,0 +1,20 @@
+#login{
+    margin:0px auto 0px auto;
+    width: 60%;
+    background-color: white;
+    padding:5% 0 5% 10%;
+
+}
+
+.signinField{
+   width: 80%;
+}
+
+#signinButton{
+    width: 40%;
+    margin-left: 20%;
+}
+#loginTitle{
+    text-align: center;
+    padding-top: 60px;
+}

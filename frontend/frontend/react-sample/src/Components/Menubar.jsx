@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { HStack } from "@mui/material";
 import "../css/Menubar.css";
 
-const Menubar = ({ setMenubarFlag }) => {
+const Menubar = () => {
   return (
     <>
       <div className="menubar">
@@ -20,8 +20,6 @@ const Menubar = ({ setMenubarFlag }) => {
         <Link className="links" to="/login">
           ログイン
         </Link>
-
-        <button onClick={() => setMenubarFlag(false)}>閉じる</button>
       </div>
     </>
   );

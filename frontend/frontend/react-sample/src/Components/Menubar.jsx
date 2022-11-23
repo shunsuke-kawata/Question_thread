@@ -16,6 +16,14 @@ const Menubar = ({ setMenubarFlag }) => {
           ホーム
         </Link>
         <br />
+        <Link className="links" to="/signin">
+          サインイン
+        </Link>
+        <br />
+        <Link className="links" to="/login">
+          ログイン
+        </Link>
+        <br />
         <button onClick={() => setMenubarFlag(false)}>閉じる</button>
       </div>
     </>

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import "../css/Signin.css";
 import { TextField, Stack, Button } from "@mui/material";
+import Common from "../Components/Common";
 
 const Signin = () => {
   //データを登録するためのフックステート
@@ -8,29 +9,41 @@ const Signin = () => {
   const onSubmit = (data) => console.log(data);
   return (
     <>
+      <Common />
+      <h2 id="signinTitle">サインインページ</h2>
       <div id="signin">
         <Stack spacing={3}>
-          <h2>サインインページ</h2>
           <TextField
+            className="signinField"
+            autoComplete="off"
             required
             label="メールアドレス"
             type="email"
             {...register("email")}
           />
-          <TextField required label="ニックネーム" {...register("name")} />
           <TextField
+            className="signinField"
+            autoComplete="off"
+            required
+            label="ニックネーム"
+            {...register("nickname")}
+          />
+          <TextField
+            className="signinField"
+            autoComplete="off"
             required
             label="パスワード"
             type="password"
             {...register("password")}
           />
           <Button
+            id="signinButton"
             color="primary"
             variant="contained"
             size="large"
             onClick={handleSubmit(onSubmit)}
           >
-            作成
+            サインイン
           </Button>
         </Stack>
       </div>

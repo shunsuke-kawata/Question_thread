@@ -1,11 +1,21 @@
 import Common from "../Components/Common";
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import "../css/Login.css";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
   return (
     <>
       <Common />
@@ -18,7 +28,7 @@ const Login = () => {
             required
             label="メールアドレス"
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
           <TextField
             className="signinField"
@@ -26,7 +36,7 @@ const Login = () => {
             required
             label="パスワード"
             type="password"
-            {...register("password")}
+            {...register("password", { required: true })}
           />
           <Button
             id="signinButton"
@@ -37,6 +47,9 @@ const Login = () => {
           >
             ログイン
           </Button>
+          <Link className="links" to="/signin">
+            サインインする
+          </Link>
         </Stack>
       </div>
     </>

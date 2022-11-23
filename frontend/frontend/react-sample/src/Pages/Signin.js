@@ -6,8 +6,17 @@ import Common from "../Components/Common";
 
 const Signin = () => {
   //データを登録するためのフックステート
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
   return (
     <>
       <Common />
@@ -17,25 +26,22 @@ const Signin = () => {
           <TextField
             className="signinField"
             autoComplete="off"
-            required
             label="メールアドレス"
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
           <TextField
             className="signinField"
             autoComplete="off"
-            required
             label="ニックネーム"
-            {...register("nickname")}
+            {...register("nickname", { required: true })}
           />
           <TextField
             className="signinField"
             autoComplete="off"
-            required
             label="パスワード"
             type="password"
-            {...register("password")}
+            {...register("password", { required: true })}
           />
           <Button
             id="signinButton"

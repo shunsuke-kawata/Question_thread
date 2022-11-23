@@ -1,35 +1,51 @@
 import { useForm } from "react-hook-form";
-import { TextField, Stack, Button } from "@mui/material";
+import { TextField, Stack, Button, TextareaAutosize } from "@mui/material";
 import "../css/QuestionForm.css";
 
 const QuestionForm = () => {
   //データを登録するためのフックステート
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
   return (
     <>
       <div id="questionform">
-        <Stack spacing={3}>
-          <TextField
+        <Stack className="questionStack" spacing={3}>
+          <div id="titleBlock">
+            <TextField
+              className="questionTitle"
+              id="standard-basic"
+              variant="standard"
+              required
+              autoComplete="off"
+              label="タイトル"
+              type="text"
+              {...register("title", { required: true })}
+            />
+          </div>
+          <TextareaAutosize
+            className="questionBody"
+            minRows={3}
             required
-            label="メールアドレス"
-            type="email"
-            {...register("email")}
-          />
-          <TextField required label="ニックネーム" {...register("name")} />
-          <TextField
-            required
-            label="パスワード"
-            type="password"
-            {...register("password")}
+            placeholder="質問の内容を入力してください"
+            {...register("body", { required: true })}
           />
           <Button
+            id="postButton"
             color="primary"
             variant="contained"
             size="large"
             onClick={handleSubmit(onSubmit)}
           >
-            作成
+            投稿する
           </Button>
         </Stack>
       </div>

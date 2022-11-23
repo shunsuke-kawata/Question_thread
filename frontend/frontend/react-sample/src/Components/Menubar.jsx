@@ -7,12 +7,12 @@ const Menubar = ({ setMenubarFlag }) => {
     <>
       <div className="menubar">
         <h3 id="menutitle">Actions</h3>
-        <Link className="links" to="/newQuestion">
-          質問する
-        </Link>
-        <br />
         <Link className="links" to="/">
           ホーム
+        </Link>
+        <br />
+        <Link className="links" to="/newQuestion">
+          質問する
         </Link>
         <br />
         <Link className="links" to="/signin">

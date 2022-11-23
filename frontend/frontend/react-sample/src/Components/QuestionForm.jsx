@@ -24,7 +24,6 @@ const QuestionForm = () => {
               className="questionTitle"
               id="standard-basic"
               variant="standard"
-              required
               autoComplete="off"
               label="タイトル"
               type="text"
@@ -34,7 +33,6 @@ const QuestionForm = () => {
           <TextareaAutosize
             className="questionBody"
             minRows={3}
-            required
             placeholder="質問の内容を入力してください"
             {...register("body", { required: true })}
           />

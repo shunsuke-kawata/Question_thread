@@ -13,7 +13,7 @@
  .questionBody{
     width: 90%;
     height: 30px;
-    font-size: large;
+    font-size: 20px;
  }
  
  #questionButton{
@@ -23,5 +23,5 @@
 
  #postButton{
     width: 40%;
-
+    margin-left: 25%;
 }

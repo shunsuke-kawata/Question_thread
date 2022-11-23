@@ -52,9 +52,7 @@ const Signin = () => {
           >
             サインイン
           </Button>
-          <Link className="links" to="/login">
-            すでにログイン済みの場合はこちら
-          </Link>
+          <Link to="/login">すでにログイン済みの場合はこちら</Link>
         </Stack>
       </div>
     </>

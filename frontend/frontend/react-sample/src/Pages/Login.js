@@ -47,9 +47,7 @@ const Login = () => {
           >
             ログイン
           </Button>
-          <Link className="links" to="/signin">
-            サインインする
-          </Link>
+          <Link to="/signin">サインインする</Link>
         </Stack>
       </div>
     </>

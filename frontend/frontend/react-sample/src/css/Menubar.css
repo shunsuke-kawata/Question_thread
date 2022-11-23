@@ -18,3 +18,8 @@ a{
     font-weight: bold;
 }
 
+.links{
+    text-align: center;
+    font-size: large;
+    display: block;
+}

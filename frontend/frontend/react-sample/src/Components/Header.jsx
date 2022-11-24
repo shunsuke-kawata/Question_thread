@@ -13,10 +13,11 @@ const Header = ({ menubarflag, setMenubarFlag }) => {
       <AppBar className="appbar" children="node" position="fixed">
         <Toolbar variant="dense">
           <IconButton
+            id="buttonIcon"
             edge="start"
             color="inherit"
             aria-label="menu"
-            variant="h4"
+            variant="h2"
             sx={{ mr: 2 }}
             onClick={() => setMenubarFlag(true)}
           >

@@ -1,11 +1,8 @@
 import { useForm } from "react-hook-form";
-import "../css/Signin.css";
 import { TextField, Stack, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import Common from "../Components/Common";
 
-const Signin = () => {
-  //データを登録するためのフックステート
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
@@ -19,9 +16,7 @@ const Signin = () => {
   };
   return (
     <>
-      <Common />
-      <h2 id="signinTitle">サインイン</h2>
-      <form id="signin">
+      <form id="login">
         <Stack spacing={3}>
           <TextField
             className="signinField"
@@ -30,13 +25,6 @@ const Signin = () => {
             label="メールアドレス"
             type="email"
             {...register("email", { required: true })}
-          />
-          <TextField
-            className="signinField"
-            autoComplete="off"
-            required
-            label="ニックネーム"
-            {...register("nickname", { required: true })}
           />
           <TextField
             className="signinField"
@@ -53,13 +41,13 @@ const Signin = () => {
             size="large"
             onClick={handleSubmit(onSubmit)}
           >
-            サインイン
+            ログイン
           </Button>
-          <Link to="/login">すでにログイン済みの場合はこちら</Link>
+          <Link to="/signin">サインインする</Link>
         </Stack>
       </form>
     </>
   );
 };
 
-export default Signin;
+export default LoginForm;

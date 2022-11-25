@@ -7,7 +7,7 @@ import {
   Box,
 } from "@material-ui/core";
 
-const Header = ({ menubarflag, setMenubarFlag }) => {
+const Header = ({ setMenubarFlag }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar className="appbar" children="node" position="fixed">

@@ -8,7 +8,6 @@ const QuestionForm = () => {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {

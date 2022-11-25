@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const dummyData = [];
+export const dummyData = [];
 for (var i = 0; i < 204; i++) {
   var data = {
     id: uuidv4(),
@@ -10,4 +10,8 @@ for (var i = 0; i < 204; i++) {
   dummyData.push(data);
 }
 
-export default dummyData;
+export const dummyUser = {
+  id: uuidv4(),
+  nickname: "testUser",
+  mail: "test@test.com",
+};

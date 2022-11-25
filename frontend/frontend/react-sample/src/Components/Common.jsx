@@ -4,11 +4,12 @@ import Menubar from "./Menubar";
 import { Drawer } from "@material-ui/core";
 import { useState } from "react";
 
-const Common = () => {
+const Common = ({ dummyUser }) => {
   const [menubarflag, setMenubarFlag] = useState(false);
+  console.log(dummyUser);
   return (
     <>
-      <Header menubarflag={menubarflag} setMenubarFlag={setMenubarFlag} />
+      <Header setMenubarFlag={setMenubarFlag} />
       <Drawer
         anchor="left"
         open={menubarflag}

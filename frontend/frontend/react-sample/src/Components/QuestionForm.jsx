@@ -27,15 +27,17 @@ const QuestionForm = () => {
               autoComplete="off"
               label="タイトル"
               type="text"
-              {...register("title", { required: true })}
+              {...register("title", { required: "title is required field" })}
             />
+            <p className="error-sentence">{errors.title?.message}</p>
           </div>
           <TextareaAutosize
             className="questionBody"
             minRows={3}
             placeholder="質問の内容を入力してください"
-            {...register("body", { required: true })}
+            {...register("body", { required: "body is required field" })}
           />
+          <p className="error-sentence">{errors.body?.message}</p>
           <Button
             id="postButton"
             color="primary"

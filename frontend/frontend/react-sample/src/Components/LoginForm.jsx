@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import "../css/LoginForm.css";
 
 const LoginForm = () => {
   const {
@@ -23,17 +24,26 @@ const LoginForm = () => {
             autoComplete="off"
             required
             label="メールアドレス"
+            placeholder="有効なメールアドレスを入力してください"
             type="email"
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: "email is required field",
+            })}
           />
+          <p className="error-sentence">{errors.email?.message}</p>
           <TextField
             className="signinField"
             autoComplete="off"
             required
             label="パスワード"
+            placeholder="6文字以上のパスワードを入力してください"
             type="password"
-            {...register("password", { required: true })}
+            {...register("password", {
+              minLength: 6,
+              required: "password is required field",
+            })}
           />
+          <p className="error-sentence">{errors.password?.message}</p>
           <Button
             id="signinButton"
             color="primary"

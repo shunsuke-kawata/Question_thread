@@ -1,9 +1,10 @@
 
 .menubar{
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 65px;
+    padding-right: 65px;
     background-color: #3f51b5;
     height: 100%;
+    position:relative;
 }
 
 #menutitle{
@@ -27,3 +28,18 @@ a{
     display: block;
     padding-bottom: 10px;
 }
+
+.batsu{
+    font-size: 300%;/*ボタンの大きさ*/
+    text-align: center;
+    font-weight: bold;
+    color: white;
+  
+  
+    position: absolute;
+    right:0;
+    top:-15px;
+    width: 54px;
+    height:54px;
+  }
+    

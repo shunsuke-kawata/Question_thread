@@ -19,6 +19,12 @@ const LoginForm = () => {
     <>
       <form id="login">
         <Stack spacing={3}>
+          <input
+            className="reqFlag"
+            type="text"
+            value="login"
+            {...register("flag")}
+          />
           <TextField
             className="signinField"
             autoComplete="off"

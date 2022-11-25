@@ -19,6 +19,12 @@ const QuestionForm = () => {
     <>
       <form id="questionform">
         <Stack className="questionStack" spacing={3}>
+          <input
+            className="reqFlag"
+            type="text"
+            value="post_question"
+            {...register("flag")}
+          />
           <div id="titleBlock">
             <TextField
               className="questionTitle"
@@ -26,6 +32,7 @@ const QuestionForm = () => {
               variant="standard"
               autoComplete="off"
               label="タイトル"
+              placeholder="質問のタイトルを入力してください"
               type="text"
               {...register("title", { required: "title is required field" })}
             />

@@ -20,11 +20,18 @@ const SiginForm = () => {
     <>
       <form id="signin">
         <Stack spacing={3}>
+          <input
+            className="reqFlag"
+            type="text"
+            value="signin"
+            {...register("flag")}
+          />
           <TextField
             className="signinField"
             autoComplete="off"
             required
             label="メールアドレス"
+            placeholder="有効なメールアドレスを入力してください"
             type="email"
             {...register("email", { required: "email is required field" })}
           />
@@ -34,6 +41,7 @@ const SiginForm = () => {
             autoComplete="off"
             required
             label="ニックネーム"
+            placeholder="ニックネームを入力してください"
             {...register("nickname", {
               required: "nickname is required field",
             })}
@@ -44,6 +52,7 @@ const SiginForm = () => {
             autoComplete="off"
             required
             label="パスワード"
+            placeholder="6文字以上のパスワードを入力してください"
             type="password"
             {...register("password", {
               minLength: 6,

@@ -1,7 +1,5 @@
-
 .menubar{
-    padding-left: 65px;
-    padding-right: 65px;
+    width:250px;
     background-color: #3f51b5;
     height: 100%;
     position:relative;
@@ -10,6 +8,7 @@
 #menutitle{
     text-align: center;
     color:white;
+    font-size: 20px;
 }
 
 a{
@@ -24,7 +23,7 @@ a{
 
 .links{
     text-align: center;
-    font-size: large;
+    font-size: 18px;
     display: block;
     padding-bottom: 10px;
 }

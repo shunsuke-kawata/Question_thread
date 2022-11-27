@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
 } from "@material-ui/core";
+import UserInfo from "./UserInfo";
 
 const Header = ({ setMenubarFlag }) => {
   return (
@@ -27,6 +28,7 @@ const Header = ({ setMenubarFlag }) => {
           <Typography variant="h4" color="inherit" component="div">
             Question Thread
           </Typography>
+          <UserInfo />
         </Toolbar>
       </AppBar>
     </Box>

@@ -1,16 +1,23 @@
 import React from "react";
 import "../css/Question.css";
 
-const Question = ({ id, title, body, setQuestionOrDetail }) => {
+const Question = ({ datum, setClickedQuestion, setQuestionOrDetail }) => {
   const clickHandle = () => {
     setQuestionOrDetail(true);
-    console.log(id, title, body);
+    setClickedQuestion(datum.id);
+    console.log(datum.id);
   };
   return (
     <div className="question_body" onClick={() => clickHandle()}>
-      <h4>{id}</h4>
-      <p>{title}</p>
-      <p>{body}</p>
+      <div className="titleDiv">
+        <h3 className="questionElements">・{datum.title}</h3>
+      </div>
+      <div className="bodyDiv">
+        <p className="questionElements">{datum.body}</p>
+      </div>
+      <div className="infoDiv">
+        <p>回答数：{datum.answerCount}</p>
+      </div>
     </div>
   );
 };

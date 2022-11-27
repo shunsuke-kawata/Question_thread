@@ -7,14 +7,23 @@ import Common from "./Common";
 
 const Main = () => {
   const [questionOrDetail, setQuestionOrDetail] = useState(false);
+  const [clickedQuestion, setClickedQuestion] = useState("none");
   const data = dummyData;
   return (
     <>
       <Common dummyUser={dummyUser} />
       {questionOrDetail ? (
-        <Details setQuestionOrDetail={setQuestionOrDetail} />
+        <Details
+          clickedQuestion={clickedQuestion}
+          setClickedQuestion={setClickedQuestion}
+          setQuestionOrDetail={setQuestionOrDetail}
+        />
       ) : (
-        <QuestionArea data={data} setQuestionOrDetail={setQuestionOrDetail} />
+        <QuestionArea
+          data={data}
+          setClickedQuestion={setClickedQuestion}
+          setQuestionOrDetail={setQuestionOrDetail}
+        />
       )}
     </>
   );

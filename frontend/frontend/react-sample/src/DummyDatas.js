@@ -5,7 +5,8 @@ for (var i = 0; i < 204; i++) {
   var data = {
     id: uuidv4(),
     title: "サンプルデータ" + String(i + 1),
-    body: "質問の内容",
+    body: "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+    answerCount: 0,
   };
   dummyData.push(data);
 }

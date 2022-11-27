@@ -1,8 +1,31 @@
 .question_body{
     background-color: white;
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
-    border-radius: 20px;
-    text-align: center;
+    width: 60%;
+    margin:0 auto 30px auto;
+}
+
+
+.question_body:hover{
+    color: #3f51b5;
+}
+.questionElements{
+    text-align: left;
+    padding-left: 5px;
+}
+
+.titleDiv{
+    background-color: lightgreen;
+
+    word-wrap: break-word;
+}
+
+.bodyDiv{
+    word-wrap: break-word;
+    width:90%;
+    margin-left:5%;
+}
+
+.infoDiv{
+    padding-right: 15px;
+    text-align: right;
 }

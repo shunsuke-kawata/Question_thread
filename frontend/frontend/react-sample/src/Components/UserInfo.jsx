@@ -1,11 +1,9 @@
 import React from "react";
-import { Stack } from "@mui/material";
 import { dummyUser } from "../DummyDatas";
-import { useState } from "react";
 import "../css/UserInfo.css";
 
 const UserInfo = () => {
-  const [infoFlag, setInfoFlag] = useState(false);
+  // const [infoFlag, setInfoFlag] = useState(false);
 
   return (
     <>

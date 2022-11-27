@@ -1,12 +1,21 @@
 import "../css/Details.css";
 
-const Details = ({ setQuestionOrDetail }) => {
+const Details = ({
+  clickedQuestion,
+  setClickedQuestion,
+  setQuestionOrDetail,
+}) => {
   const clickHandle = () => {
+    setClickedQuestion("none");
     setQuestionOrDetail(false);
   };
+
+  if (clickedQuestion === "none") {
+    return <></>;
+  }
   return (
     <>
-      <p id="test">質問回答詳細</p>
+      <p id="test">{clickedQuestion}</p>
       <button onClick={() => clickHandle()}>閉じる</button>
     </>
   );

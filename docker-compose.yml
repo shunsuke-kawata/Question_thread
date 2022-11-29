@@ -3,10 +3,10 @@ services:
   react-app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./frontend/Dockerfile
     volumes:
       - ./frontend:/usr/src/app 
-    command: sh -c "cd react-sample && npm install && npm start"
+    command: sh -c "cd ./frontend/react-sample && npm install && npm start"
     ports:
       - "3000:3000"
     stdin_open: true 

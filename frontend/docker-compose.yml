@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app # ローカルをコンテナ内にマウント
-    command: sh -c "cd react-sample && yarn start"
+      - ./frontend:/usr/src/app 
+    command: sh -c "cd react-sample && npm install && npm start"
     ports:
       - "3000:3000"
     stdin_open: true 

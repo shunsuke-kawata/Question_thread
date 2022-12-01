@@ -1,0 +1,44 @@
+.menubar{
+    width:250px;
+    background-color: #3f51b5;
+    height: 100%;
+    position:relative;
+}
+
+#menutitle{
+    text-align: center;
+    color:white;
+    font-size: 20px;
+}
+
+a{
+    color:inherit;
+    text-decoration: none;
+    color:white;
+}
+
+.a:focus{
+    font-weight: bold;
+}
+
+.links{
+    text-align: center;
+    font-size: 18px;
+    display: block;
+    padding-bottom: 10px;
+}
+
+.batsu{
+    font-size: 300%;/*ボタンの大きさ*/
+    text-align: center;
+    font-weight: bold;
+    color: white;
+  
+  
+    position: absolute;
+    right:0;
+    top:-15px;
+    width: 54px;
+    height:54px;
+  }
+    

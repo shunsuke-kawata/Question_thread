@@ -19,6 +19,5 @@ func main() {
 	}
 
 	http.HandleFunc("/", h)
-
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { TextField, Stack, Button, TextareaAutosize } from "@mui/material";
 import "../css/QuestionForm.css";
 
@@ -11,6 +12,8 @@ const QuestionForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    const params = new URLSearchParams(data);
+    axios.post("http://localhost:8080", params);
     console.log(data);
     reset();
   };

@@ -5,5 +5,5 @@ RUN go get github.com/cosmtrek/air@v1.29.0
 
 WORKDIR /app
 COPY ./ ./app
-CMD ["air", "-c", ".air.toml"]
+CMD ["air", "-c", "./go/.air.toml"]
 

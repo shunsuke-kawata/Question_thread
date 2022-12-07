@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-    go:
+    go-app:
       container_name: backend-go-app
       build: 
         context: .

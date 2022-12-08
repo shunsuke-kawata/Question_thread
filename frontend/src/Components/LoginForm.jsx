@@ -11,9 +11,9 @@ const LoginForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const params = new URLSearchParams(data);
-    axios.post("http://localhost:8080", params);
+    await axios.post("http://localhost:8080/post", params);
     console.log(data);
     reset();
   };

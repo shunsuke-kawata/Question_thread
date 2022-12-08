@@ -11,9 +11,9 @@ const SiginForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const params = new URLSearchParams(data);
-    axios.post("http://localhost:8080/receivePost", params);
+    await axios.post("http://localhost:8080", data);
     console.log(data);
     reset();
   };

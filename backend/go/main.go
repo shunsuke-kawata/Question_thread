@@ -1,40 +1,43 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
-const (
-	url = "http://localhost:3000"
-)
-
-type Signin struct {
-	Flag     string `json:"flag"`
-	Mail     string `json:"mail"`
-	Nickname string `json:"nickname"`
-	Password string `json:"password"`
-}
-
-// reactからのpostを受け取る
-func receivePost(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Access-Control-Allow-Origin", url)
-	// FormValueメソッドで値を取り出せる
-	fmt.Println("Name:", r.FormValue("nickname"))
-	received_json := r.Body
-
-	outputJson, err := json.Marshal(&received_json)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(w, string(outputJson))
-
-}
-
-// main.goがはじめに実行される
 func main() {
-	http.HandleFunc("/", receivePost)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// ginのEngineインスタンスを生成
+	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+		},
+		AllowHeaders: []string{
+			"Access-Control-Allow-Credentials",
+			"Access-Control-Allow-Headers",
+			"Content-Type",
+			"Content-Length",
+			"Accept-Encoding",
+			"Authorization",
+		},
+	}))
+
+	router.POST("/post", func(c *gin.Context) {
+		/*
+		   DB操作など
+		*/
+		email := c.PostForm("email")
+		c.JSON(http.StatusCreated, gin.H{
+			"status": "ok",
+		})
+		fmt.Println(email)
+	})
+	router.Run(":8080")
+
 }

@@ -13,7 +13,7 @@ const SiginForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const params = new URLSearchParams(data);
-    await axios.post("http://localhost:8080", data);
+    await axios.post("http://localhost:8080/signin", params);
     console.log(data);
     reset();
   };

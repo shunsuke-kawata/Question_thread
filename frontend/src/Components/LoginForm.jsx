@@ -13,7 +13,7 @@ const LoginForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const params = new URLSearchParams(data);
-    await axios.post("http://localhost:8080/post", params);
+    await axios.post("http://localhost:8080/login", params);
     console.log(data);
     reset();
   };

@@ -27,7 +27,7 @@ func createRouter() *gin.Engine {
 		},
 	}))
 
-	router.POST("/post", func(c *gin.Context) {
+	router.POST("/signin", func(c *gin.Context) {
 		/*
 		   DB操作など
 		*/
@@ -37,5 +37,6 @@ func createRouter() *gin.Engine {
 		})
 		fmt.Println(email)
 	})
+
 	return router
 }

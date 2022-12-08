@@ -8,9 +8,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 	"github.com/shunsuke-kawata/Question_thread/go/router"
+//
+
+func test(c *gin.Context) {
+	/*
+	   DB操作など
+	*/
+	flag := c.PostForm("flag")
+	c.JSON(http.StatusCreated, gin.H{
+		"status": "ok",
+	})
+	fmt.Println(flag)
+}
+
 func main() {
+	// router := router.createRouter()
 	// ginのEngineインスタンスを生成
 	router := gin.Default()
+
+	//corsの設定
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{
@@ -28,16 +45,8 @@ func main() {
 		},
 	}))
 
-	router.POST("/post", func(c *gin.Context) {
-		/*
-		   DB操作など
-		*/
-		email := c.PostForm("email")
-		c.JSON(http.StatusCreated, gin.H{
-			"status": "ok",
-		})
-		fmt.Println(email)
-	})
-	router.Run(":8080")
+	router.POST("/signin", test)
+	router.POST("/login", test)
 
+	router.Run()
 }

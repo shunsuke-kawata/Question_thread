@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const Common = ({ dummyUser }) => {
   const [menubarflag, setMenubarFlag] = useState(false);
-  console.log(dummyUser);
   return (
     <>
       <Header setMenubarFlag={setMenubarFlag} />

@@ -12,21 +12,19 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const params = new URLSearchParams(data);
-    await axios.post("http://localhost:8080/login", params);
-    console.log(data);
-    reset();
+    try {
+      await axios.post("http://localhost:8080/login", data);
+      reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log(data);
+    }
   };
   return (
     <>
       <form id="login">
         <Stack spacing={3}>
-          <input
-            className="reqFlag"
-            type="text"
-            value="login"
-            {...register("flag")}
-          />
           <TextField
             className="signinField"
             autoComplete="off"

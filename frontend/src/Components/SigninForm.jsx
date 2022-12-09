@@ -13,8 +13,7 @@ const SiginForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      const params = new URLSearchParams(data);
-      await axios.post("http://localhost:8080/signin", params);
+      await axios.post("http://localhost:8080/signin", data);
       reset();
     } catch (err) {
       console.log(err);
@@ -27,12 +26,6 @@ const SiginForm = () => {
     <>
       <form id="signin">
         <Stack spacing={3}>
-          <input
-            className="reqFlag"
-            type="text"
-            value="signin"
-            {...register("flag")}
-          />
           <TextField
             className="signinField"
             autoComplete="off"

@@ -11,22 +11,21 @@ const QuestionForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    const params = new URLSearchParams(data);
-    axios.post("http://localhost:8080/post", params);
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await axios.post("http://localhost:8080/questionPost", data);
+      reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log(data);
+      console.log(typeof data);
+    }
   };
   return (
     <>
       <form id="questionform">
         <Stack className="questionStack" spacing={3}>
-          <input
-            className="reqFlag"
-            type="text"
-            value="post_question"
-            {...register("flag")}
-          />
           <div id="titleBlock">
             <TextField
               className="questionTitle"

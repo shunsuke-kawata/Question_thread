@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -12,31 +11,45 @@ import (
 //
 
 type Signin struct {
-	Flag     string `json:"flag"`
-	Mail     string `json:"email"`
-	Nickname string `json:"nickname"`
-	Password string `json:"password"`
+	Email    string
+	Nickname string
+	Password string
 }
 
-func test(c *gin.Context) {
-	/*
-	   DB操作など
-	*/
-	flag := c.PostForm("flag")
-	c.JSON(http.StatusCreated, gin.H{
-		"status": "ok",
-	})
-	fmt.Println(flag)
+type Login struct {
+	Email    string
+	Password string
 }
 
+type Post struct {
+	Title string
+	Body  string
+}
+
+// 3000/signinからのpostを取得する
 func signin(c *gin.Context) {
-	// var signinUser Signin
-	// c.BindJSON(&signinUser)
-	// fmt.Println(signinUser)
-	var form map[string]interface{}
-	c.BindJSON(&form)
-	flag := c.PostForm("flag")
-	fmt.Println(flag)
+	var signinUser Signin
+	c.BindJSON(&signinUser)
+	fmt.Println(signinUser.Email, signinUser.Nickname, signinUser.Password)
+	fmt.Println(c.ContentType())
+
+}
+
+// 3000/loginからのpostを取得する
+func login(c *gin.Context) {
+	var loginUser Login
+	c.BindJSON(&loginUser)
+	fmt.Println(loginUser.Email, loginUser.Password)
+	fmt.Println(c.ContentType())
+
+}
+
+// 3000/newQuestionからのpostを取得する
+func questionPost(c *gin.Context) {
+	var postQuestion Post
+	c.BindJSON(&postQuestion)
+	fmt.Println(postQuestion.Title, postQuestion.Body)
+	fmt.Println(c.ContentType())
 
 }
 
@@ -64,8 +77,8 @@ func main() {
 	}))
 
 	router.POST("/signin", signin)
-	router.POST("/login", test)
-	router.POST("/post", test)
+	router.POST("/login", login)
+	router.POST("/questionPost", questionPost)
 
 	router.Run()
 }

@@ -12,10 +12,15 @@ const SiginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const params = new URLSearchParams(data);
-    await axios.post("http://localhost:8080/signin", params);
-    console.log(data);
-    reset();
+    try {
+      const params = new URLSearchParams(data);
+      await axios.post("http://localhost:8080/signin", params);
+      reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log(data);
+    }
   };
 
   return (

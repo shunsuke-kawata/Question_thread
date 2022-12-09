@@ -11,6 +11,13 @@ import (
 // 	"github.com/shunsuke-kawata/Question_thread/go/router"
 //
 
+type Signin struct {
+	Flag     string `json:"flag"`
+	Mail     string `json:"email"`
+	Nickname string `json:"nickname"`
+	Password string `json:"password"`
+}
+
 func test(c *gin.Context) {
 	/*
 	   DB操作など
@@ -20,6 +27,17 @@ func test(c *gin.Context) {
 		"status": "ok",
 	})
 	fmt.Println(flag)
+}
+
+func signin(c *gin.Context) {
+	// var signinUser Signin
+	// c.BindJSON(&signinUser)
+	// fmt.Println(signinUser)
+	var form map[string]interface{}
+	c.BindJSON(&form)
+	flag := c.PostForm("flag")
+	fmt.Println(flag)
+
 }
 
 func main() {
@@ -45,8 +63,9 @@ func main() {
 		},
 	}))
 
-	router.POST("/signin", test)
+	router.POST("/signin", signin)
 	router.POST("/login", test)
+	router.POST("/post", test)
 
 	router.Run()
 }

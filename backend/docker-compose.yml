@@ -1,12 +1,38 @@
 version: "3.8"
 
 services:
+    #バックエンドを処理するgoアプリ
     go-app:
       container_name: backend-go-app
       build: 
         context: .
         dockerfile : ./Dockerfile
+      #環境変数
+      environment:
+        - GO_PORT
       ports:
-        - 8080:8080
+        - ${GO_PORT}:${GO_PORT}
       volumes:
         - .:/app/
+    
+    db:
+      image: mysql:8.0
+      container_name: backend-db-mysql
+      environment:
+        #スーパーユーザであるrootアカウントに設定するパスワード
+        - MYSQL_ROOT_PASSWORD
+        #image起動時に作成するデータベースの名前
+        - MYSQL_DATABASE
+        - MYSQL_USER
+        - MYSQL_PASSWORD
+        - TZ
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      volumes:
+        - db-data:/var/lib/mysql
+        - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      ports:
+        - ${DB_PORT}:${DB_PORT}
+    
+volumes:
+  db-data:
+    driver: local

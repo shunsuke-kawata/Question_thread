@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -10,17 +11,20 @@ import (
 // 	"github.com/shunsuke-kawata/Question_thread/go/router"
 //
 
+// サインインのバリデーション
 type Signin struct {
 	Email    string
 	Nickname string
 	Password string
 }
 
+// ログインのバリデーション
 type Login struct {
 	Email    string
 	Password string
 }
 
+// 質問投稿のバリデーション
 type Post struct {
 	Title string
 	Body  string
@@ -61,6 +65,8 @@ func main() {
 	//corsの設定
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},
+
+		//許可するメソッド
 		AllowMethods: []string{
 			"POST",
 			"GET",
@@ -76,9 +82,11 @@ func main() {
 		},
 	}))
 
+	//ルーティング→corsの後にする
 	router.POST("/signin", signin)
 	router.POST("/login", login)
 	router.POST("/questionPost", questionPost)
 
-	router.Run()
+	///インスタンスの実行
+	router.Run(":" + os.Getenv("GO_PORT"))
 }

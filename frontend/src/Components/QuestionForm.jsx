@@ -13,7 +13,7 @@ const QuestionForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:8080/questionPost", data);
+      await axios.post(process.env.REACT_APP_HOST_URL + "/questionPost", data);
       reset();
     } catch (err) {
       console.log(err);

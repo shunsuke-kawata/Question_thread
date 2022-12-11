@@ -7,28 +7,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// サインインのバリデーション
-type Signin struct {
+type SigninUser struct {
 	Email    string
 	Nickname string
 	Password string
 }
 
-// ログインのバリデーション
-type Login struct {
+type LoginUser struct {
 	Email    string
 	Password string
 }
 
-// 質問投稿のバリデーション
-type Post struct {
+type PostQuestion struct {
 	Title string
 	Body  string
 }
 
 // 3000/signinからのpostを取得する
-func signin(c *gin.Context) {
-	var signinUser Signin
+func SigninRouter(c *gin.Context) {
+	var signinUser SigninUser
 	c.BindJSON(&signinUser)
 	fmt.Println(signinUser.Email, signinUser.Nickname, signinUser.Password)
 	fmt.Println(c.ContentType())
@@ -36,8 +33,8 @@ func signin(c *gin.Context) {
 }
 
 // 3000/loginからのpostを取得する
-func login(c *gin.Context) {
-	var loginUser Login
+func LoginRouter(c *gin.Context) {
+	var loginUser LoginUser
 	c.BindJSON(&loginUser)
 	fmt.Println(loginUser.Email, loginUser.Password)
 	fmt.Println(c.ContentType())
@@ -45,15 +42,17 @@ func login(c *gin.Context) {
 }
 
 // 3000/newQuestionからのpostを取得する
-func questionPost(c *gin.Context) {
-	var postQuestion Post
+func QuestionPostRouter(c *gin.Context) {
+	var postQuestion PostQuestion
 	c.BindJSON(&postQuestion)
 	fmt.Println(postQuestion.Title, postQuestion.Body)
 	fmt.Println(c.ContentType())
+	fmt.Println(postQuestion)
 
 }
 
 func CreateRouter() *gin.Engine {
+	//routerのインスタンスを作成
 	router := gin.Default()
 	//corsの設定
 	router.Use(cors.New(cors.Config{
@@ -76,9 +75,9 @@ func CreateRouter() *gin.Engine {
 	}))
 
 	//ルーティング→corsの後にする
-	router.POST("/signin", signin)
-	router.POST("/login", login)
-	router.POST("/questionPost", questionPost)
+	router.POST("/signin", SigninRouter)
+	router.POST("/login", LoginRouter)
+	router.POST("/questionPost", QuestionPostRouter)
 
 	return router
 }

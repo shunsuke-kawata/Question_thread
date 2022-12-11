@@ -22,21 +22,19 @@ services:
       container_name: backend-db-mysql
       environment:
         #スーパーユーザであるrootアカウントに設定するパスワード
-        - MYSQL_ROOT_PASSWORD
+        MYSQL_ROOT_PASSWORD: root
         #image起動時に作成するデータベースの名前
-        - MYSQL_DATABASE
-        - MYSQL_USER
-        - MYSQL_PASSWORD
-        - TZ
-        - DB_PORT
+        MYSQL_DATABASE: question_thread_db
+        MYSQL_USER: user
+        MYSQL_PASSWORD: password
+        TZ: Asia/Tokyo
       restart: always
       command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      #手元のOSのディレクトリをコンテナの中のディレクトリにマウントする
+      #{手元のOS側のファイルのパス}:{コンテナ内のマウント先のパス}
       volumes:
-        - db-data:/var/lib/mysql
         - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       ports:
         - ${DB_PORT}:${DB_PORT}
     
-volumes:
-  db-data:
-    driver: local
+

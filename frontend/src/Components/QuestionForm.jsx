@@ -19,7 +19,6 @@ const QuestionForm = () => {
       console.log(err);
     } finally {
       console.log(data);
-      console.log(typeof data);
     }
   };
   return (

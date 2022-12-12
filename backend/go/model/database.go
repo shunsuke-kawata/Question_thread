@@ -1,9 +1,13 @@
 package model
 
 import (
+	"errors"
 	"fmt"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
+	"github.com/shunsuke-kawata/Question_thread/go/crypt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -37,15 +41,18 @@ type Comment struct {
 	UpdatedAt  time.Time
 }
 
+// データベースとそのエラー
 var db *gorm.DB
 var err error
 
-func Init() {
-
-	//権限が×
-
+// importしたときに呼ばれる
+func init() {
+	//dsn
+	err := godotenv.Load(os.Getenv("DSN"))
+	//{user}:{password}@tcp({dockerのコンテナ名}:{port})/{データベース名}
 	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4"
 	fmt.Println("dsn", dsn)
+	//データベースに接続する
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("failed")
@@ -53,5 +60,40 @@ func Init() {
 		fmt.Println("successed")
 	}
 	//作成したデータベースに対してスキーマをマイグレーションする
+	db.AutoMigrate(&User{}, &Question{}, &Comment{})
+
+}
+
+func OpenDB() *gorm.DB {
+	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4"
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Println("failed")
+	} else {
+		fmt.Println("successed")
+	}
+	db.AutoMigrate(&User{}, &Question{}, &Comment{})
+
+	return db
+}
+
+func SigninModel(email string, nickname string, password string) (*User, error) {
+	signinUser := User{}
+	db.Where("id = ?", signinUser.ID).First(&signinUser)
+	if signinUser.ID != 0 {
+		err := errors.New("同一名のUserIdが既に登録されています。")
+		fmt.Println(err)
+		return nil, err
+	}
+	encryptPw, err := crypt.PasswordEncrypt(password)
+	if err != nil {
+		fmt.Println("パスワード暗号化中にエラーが発生しました。：", err)
+		return nil, err
+	}
+
+	signinUser = User{Email: email, Nickname: nickname, Password: encryptPw}
+	db.Create(&signinUser)
+
+	return &signinUser, nil
 
 }

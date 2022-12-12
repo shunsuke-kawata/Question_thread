@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/shunsuke-kawata/Question_thread/go/model"
 )
 
 type SigninUser struct {
@@ -28,7 +29,12 @@ func SigninRouter(c *gin.Context) {
 	var signinUser SigninUser
 	c.BindJSON(&signinUser)
 	fmt.Println(signinUser.Email, signinUser.Nickname, signinUser.Password)
-	fmt.Println(c.ContentType())
+	user, err := model.SigninModel(signinUser.Email, signinUser.Nickname, signinUser.Password)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(user)
 
 }
 

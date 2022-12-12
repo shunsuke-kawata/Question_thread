@@ -43,7 +43,12 @@ func LoginRouter(c *gin.Context) {
 	var loginUser LoginUser
 	c.BindJSON(&loginUser)
 	fmt.Println(loginUser.Email, loginUser.Password)
-	fmt.Println(c.ContentType())
+	user, err := model.LoginModel(loginUser.Email, loginUser.Password)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(user)
 
 }
 

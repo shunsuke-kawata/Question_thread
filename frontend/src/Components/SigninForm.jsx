@@ -14,7 +14,6 @@ const SiginForm = () => {
   const onSubmit = async (data) => {
     try {
       await axios.post(process.env.REACT_APP_HOST_URL + "/signin", data);
-
       reset();
     } catch (err) {
       console.log(err);

@@ -45,13 +45,13 @@ type Comment struct {
 var db *gorm.DB
 var err error
 
-// importしたときに呼ばれる
+// importしたときに呼ばれる(packageがmainでないため)
 func init() {
 	//dsn
 	err := godotenv.Load(os.Getenv("DSN"))
 	//{user}:{password}@tcp({dockerのコンテナ名}:{port})/{データベース名}
 	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4"
-	fmt.Println("dsn", dsn)
+
 	//データベースに接続する
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -64,36 +64,47 @@ func init() {
 
 }
 
-func OpenDB() *gorm.DB {
-	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4"
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		fmt.Println("failed")
-	} else {
-		fmt.Println("successed")
-	}
-	db.AutoMigrate(&User{}, &Question{}, &Comment{})
-
-	return db
-}
-
+// サインインを行うモデル
 func SigninModel(email string, nickname string, password string) (*User, error) {
 	signinUser := User{}
-	db.Where("id = ?", signinUser.ID).First(&signinUser)
+	db.Debug().Where("email = ?", email).First(&signinUser)
 	if signinUser.ID != 0 {
-		err := errors.New("同一名のUserIdが既に登録されています。")
-		fmt.Println(err)
+		err := errors.New("A user with the same address has already been registered.")
 		return nil, err
 	}
 	encryptPw, err := crypt.PasswordEncrypt(password)
 	if err != nil {
-		fmt.Println("パスワード暗号化中にエラーが発生しました。：", err)
+		fmt.Println("An error occurred while encrypting the password.", err)
 		return nil, err
+	} else {
+		fmt.Println("fjgieowjfgeiowjgiirhgofe")
 	}
 
 	signinUser = User{Email: email, Nickname: nickname, Password: encryptPw}
 	db.Create(&signinUser)
 
 	return &signinUser, nil
+
+}
+
+func LoginModel(email string, password string) (*User, error) {
+	loginUser := User{}
+	db.Debug().Where("email = ?", email).First(&loginUser)
+	if loginUser.ID == 0 {
+		err := errors.New("User with matching email address does not exist.")
+		return nil, err
+	} else {
+		fmt.Println("user exists")
+	}
+
+	err := crypt.CompareHashAndPassword(loginUser.Password, password)
+	if err != nil {
+		fmt.Println("Password did not match.", err)
+		return nil, err
+	} else {
+		fmt.Println("login successed")
+	}
+
+	return &loginUser, nil
 
 }

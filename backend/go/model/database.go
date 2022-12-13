@@ -14,7 +14,7 @@ import (
 
 // データベースのスキーマ
 type User struct {
-	gorm.Model
+	ID        uint `gorm:"primaryKey"`
 	Nickname  string
 	Email     string
 	Password  string
@@ -23,7 +23,7 @@ type User struct {
 }
 
 type Question struct {
-	gorm.Model
+	ID        uint `gorm:"primaryKey"`
 	Title     string
 	Body      string
 	UserID    uint
@@ -33,7 +33,7 @@ type Question struct {
 }
 
 type Comment struct {
-	gorm.Model
+	ID         uint `gorm:"primaryKey"`
 	Body       string
 	UserID     uint
 	QuestionID uint
@@ -50,7 +50,7 @@ func init() {
 	//dsn
 	err := godotenv.Load(os.Getenv("DSN"))
 	//{user}:{password}@tcp({dockerのコンテナ名}:{port})/{データベース名}
-	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4"
+	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4&parseTime=true"
 
 	//データベースに接続する
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -90,6 +90,9 @@ func SigninModel(email string, nickname string, password string) (*User, error) 
 func LoginModel(email string, password string) (*User, error) {
 	loginUser := User{}
 	db.Debug().Where("email = ?", email).First(&loginUser)
+
+	fmt.Println(loginUser.Email)
+	fmt.Println(loginUser.Password)
 	if loginUser.ID == 0 {
 		err := errors.New("User with matching email address does not exist.")
 		return nil, err
@@ -97,6 +100,12 @@ func LoginModel(email string, password string) (*User, error) {
 		fmt.Println("user exists")
 	}
 
+	fmt.Println(loginUser.ID)
+	fmt.Println(loginUser)
+	fmt.Println(&loginUser)
+	fmt.Printf("%T\n", loginUser.Email)
+	fmt.Printf("%T\n", loginUser.Password)
+	fmt.Println(password)
 	err := crypt.CompareHashAndPassword(loginUser.Password, password)
 	if err != nil {
 		fmt.Println("Password did not match.", err)

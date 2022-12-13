@@ -8,7 +8,7 @@ import (
 	"github.com/shunsuke-kawata/Question_thread/go/model"
 )
 
-type SigninUser struct {
+type SignupUser struct {
 	Email    string
 	Nickname string
 	Password string
@@ -25,11 +25,11 @@ type PostQuestion struct {
 }
 
 // 3000/signinからのpostを取得する
-func SigninRouter(c *gin.Context) {
-	var signinUser SigninUser
-	c.BindJSON(&signinUser)
-	fmt.Println(signinUser.Email, signinUser.Nickname, signinUser.Password)
-	user, err := model.SigninModel(signinUser.Email, signinUser.Nickname, signinUser.Password)
+func SignupRouter(c *gin.Context) {
+	var signupUser SignupUser
+	c.BindJSON(&signupUser)
+	fmt.Println(signupUser.Email, signupUser.Nickname, signupUser.Password)
+	user, err := model.SignupModel(signupUser.Email, signupUser.Nickname, signupUser.Password)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -86,7 +86,7 @@ func CreateRouter() *gin.Engine {
 	}))
 
 	//ルーティング→corsの後にする
-	router.POST("/signin", SigninRouter)
+	router.POST("/signup", SignupRouter)
 	router.POST("/login", LoginRouter)
 	router.POST("/questionPost", QuestionPostRouter)
 

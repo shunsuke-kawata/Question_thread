@@ -1,16 +1,16 @@
 import Common from "../Components/Common";
-import SigninForm from "../Components/SigninForm";
+import SignupForm from "../Components/SignupForm";
 import "../css/Signin.css";
 
-const Signin = () => {
+const Signup = () => {
   //データを登録するためのフックステー
   return (
     <>
       <Common />
       <h2 id="signinTitle">サインイン</h2>
-      <SigninForm />
+      <SignupForm />
     </>
   );
 };
 
-export default Signin;
+export default Signup;

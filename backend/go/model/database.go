@@ -50,6 +50,7 @@ func init() {
 	//dsn
 	err := godotenv.Load(os.Getenv("DSN"))
 	//{user}:{password}@tcp({dockerのコンテナ名}:{port})/{データベース名}
+	//parseTime=true created_at,updated_atを型変換する
 	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4&parseTime=true"
 
 	//データベースに接続する
@@ -65,7 +66,7 @@ func init() {
 }
 
 // サインインを行うモデル
-func SigninModel(email string, nickname string, password string) (*User, error) {
+func SignupModel(email string, nickname string, password string) (*User, error) {
 	signinUser := User{}
 	db.Debug().Where("email = ?", email).First(&signinUser)
 	if signinUser.ID != 0 {

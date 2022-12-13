@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "../css/SigninForm.css";
 
-const SiginForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
@@ -13,7 +13,7 @@ const SiginForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      await axios.post(process.env.REACT_APP_HOST_URL + "/signin", data);
+      await axios.post(process.env.REACT_APP_HOST_URL + "/signup", data);
       reset();
     } catch (err) {
       console.log(err);
@@ -76,4 +76,4 @@ const SiginForm = () => {
   );
 };
 
-export default SiginForm;
+export default SignupForm;

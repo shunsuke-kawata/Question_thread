@@ -17,7 +17,7 @@ const QuestionArea = ({ data, setClickedQuestion, setQuestionOrDetail }) => {
   //処理を記述
   //データがない時表示なし
 
-  if (!display_data) return <></>;
+  if (!data) return <></>;
   const map_data = display_data.map((datum) => (
     <Question
       datum={datum}

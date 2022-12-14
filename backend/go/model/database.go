@@ -1,6 +1,7 @@
 package model
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -39,6 +40,16 @@ type Comment struct {
 	QuestionID uint
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+}
+
+type JsonData struct {
+	ID        uint      `json:"id"`
+	Title     string    `json:"title"`
+	Body      string    `json:"body"`
+	UserID    uint      `json:"userid"`
+	Comments  []Comment `json:"comments"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 var db *gorm.DB
@@ -118,5 +129,39 @@ func NewQuestionModel(title string, body string) (*Question, error) {
 	db.Create(&newQuestion)
 
 	return &newQuestion, nil
+
+}
+
+func GetDataModel() ([]byte, error) {
+	questions := []Question{}
+	db.Debug().Find(&questions)
+	fmt.Printf("%T\n", questions)
+
+	//gorm.DBの中をforで回す
+
+	var response []byte
+
+	for _, question := range questions {
+		jsonData := JsonData{}
+		jsonData.ID = question.ID
+		jsonData.Title = question.Title
+		jsonData.Body = question.Body
+		jsonData.CreatedAt = question.CreatedAt
+		jsonData.UpdatedAt = question.UpdatedAt
+		jsonData.Comments = question.Comments
+
+		outputJson, err := json.Marshal(&jsonData)
+
+		if err != nil {
+			fmt.Println(err)
+			return nil, err
+
+		} else {
+			response = append(response, outputJson...)
+
+		}
+
+	}
+	return response, nil
 
 }

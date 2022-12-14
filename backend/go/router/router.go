@@ -70,6 +70,17 @@ func QuestionPostRouter(c *gin.Context) {
 
 }
 
+func GetDataRouter(c *gin.Context) {
+	result, err := model.GetDataModel()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+		c.JSON(204, result)
+		fmt.Printf("%T\n", result)
+	}
+}
+
 func CreateRouter() *gin.Engine {
 	//routerのインスタンスを作成
 	router := gin.Default()
@@ -97,6 +108,7 @@ func CreateRouter() *gin.Engine {
 	router.POST("/signup", SignupRouter)
 	router.POST("/login", LoginRouter)
 	router.POST("/questionPost", QuestionPostRouter)
+	router.GET("/getData", GetDataRouter)
 
 	return router
 }

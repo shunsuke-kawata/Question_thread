@@ -60,6 +60,8 @@ func LoginRouter(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 		return
+	} else {
+		c.JSON(400, err.Error())
 	}
 	fmt.Println(user)
 

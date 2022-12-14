@@ -102,12 +102,6 @@ func LoginModel(email string, password string) (*User, error) {
 		fmt.Println("user exists")
 	}
 
-	fmt.Println(loginUser.ID)
-	fmt.Println(loginUser)
-	fmt.Println(&loginUser)
-	fmt.Printf("%T\n", loginUser.Email)
-	fmt.Printf("%T\n", loginUser.Password)
-	fmt.Println(password)
 	err := crypt.CompareHashAndPassword(loginUser.Password, password)
 	if err != nil {
 		fmt.Println("Password did not match.", err)

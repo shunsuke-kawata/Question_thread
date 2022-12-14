@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { TextField, Stack, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/LoginForm.css";
 
 const LoginForm = () => {
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,8 +16,9 @@ const LoginForm = () => {
     try {
       await axios.post(process.env.REACT_APP_HOST_URL + "/login", data);
       reset();
+      navigate("/");
     } catch (err) {
-      console.log(err);
+      alert(err.response.data);
     } finally {
       console.log(data);
     }

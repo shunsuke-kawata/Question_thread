@@ -1,4 +1,4 @@
-#signin{
+#signup{
     margin:0px auto 0px auto;
     width: 60%;
     background-color: white;
@@ -6,16 +6,16 @@
 
 }
 
-.signinField{
+.signupField{
    width: 80%;
 }
 
-#signinButton{
+#signupButton{
     width: 40%;
     margin-left: 20%;
 }
 
-#signinTitle{
+#signupTitle{
     text-align: center;
     padding-top: 60px;
 }

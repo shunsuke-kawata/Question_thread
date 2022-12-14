@@ -6,7 +6,7 @@ import NewQuestion from "./Pages/NewQuestion";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 
-function App() {
+const App = () => {
   //アプリコンテスト用に質問掲示板を作成する
   return (
     <BrowserRouter>
@@ -18,6 +18,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

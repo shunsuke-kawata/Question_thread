@@ -32,6 +32,7 @@ func SignupRouter(c *gin.Context) {
 	fmt.Println(signupUser.Email, signupUser.Nickname, signupUser.Password)
 	user, err := model.SignupModel(signupUser.Email, signupUser.Nickname, signupUser.Password)
 	if err != nil {
+		c.JSON(400, err.Error())
 		fmt.Println(err)
 		return
 	}
@@ -42,15 +43,14 @@ func SignupRouter(c *gin.Context) {
 func LoginRouter(c *gin.Context) {
 	var loginUser LoginUser
 	c.BindJSON(&loginUser)
-	fmt.Println(loginUser.Email, loginUser.Password)
 	user, err := model.LoginModel(loginUser.Email, loginUser.Password)
 	if err != nil {
+		c.JSON(400, err.Error())
 		fmt.Println(err)
 		return
 	} else {
-		c.JSON(400, err.Error())
+		fmt.Println(user)
 	}
-	fmt.Println(user)
 
 }
 
@@ -58,9 +58,15 @@ func LoginRouter(c *gin.Context) {
 func QuestionPostRouter(c *gin.Context) {
 	var postQuestion PostQuestion
 	c.BindJSON(&postQuestion)
-	fmt.Println(postQuestion.Title, postQuestion.Body)
-	fmt.Println(c.ContentType())
-	fmt.Println(postQuestion)
+	newQuestion, err := model.NewQuestionModel(postQuestion.Title, postQuestion.Body)
+
+	if err != nil {
+		c.JSON(400, err.Error())
+		fmt.Println(err)
+		return
+	} else {
+		fmt.Println(newQuestion)
+	}
 
 }
 

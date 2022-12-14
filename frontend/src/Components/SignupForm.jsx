@@ -1,10 +1,11 @@
 import { TextField, Stack, Button } from "@mui/material";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import "../css/SigninForm.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../css/SignupForm.css";
 
 const SignupForm = () => {
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,8 +16,10 @@ const SignupForm = () => {
     try {
       await axios.post(process.env.REACT_APP_HOST_URL + "/signup", data);
       reset();
+      navigate("/login");
     } catch (err) {
-      console.log(err);
+      reset();
+      alert(err.response.data);
     } finally {
       console.log(data);
     }
@@ -24,10 +27,10 @@ const SignupForm = () => {
 
   return (
     <>
-      <form id="signin">
+      <form id="signup">
         <Stack spacing={3}>
           <TextField
-            className="signinField"
+            className="signupField"
             autoComplete="off"
             required
             label="メールアドレス"
@@ -37,7 +40,7 @@ const SignupForm = () => {
           />
           <p className="error-sentence">{errors.email?.message}</p>
           <TextField
-            className="signinField"
+            className="signupField"
             autoComplete="off"
             required
             label="ニックネーム"
@@ -48,7 +51,7 @@ const SignupForm = () => {
           />
           <p className="error-sentence">{errors.nickname?.message}</p>
           <TextField
-            className="signinField"
+            className="signupField"
             autoComplete="off"
             required
             label="パスワード"
@@ -61,7 +64,7 @@ const SignupForm = () => {
           />
           <p className="error-sentence">{errors.password?.message}</p>
           <Button
-            id="signinButton"
+            id="signupButton"
             color="primary"
             variant="contained"
             size="large"

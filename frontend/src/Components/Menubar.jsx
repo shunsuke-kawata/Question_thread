@@ -17,7 +17,7 @@ const Menubar = ({ setMenubarFlag }) => {
           質問する
         </Link>
         <Link className="links" to="/signup">
-          サインイン
+          サインアップ
         </Link>
         <Link className="links" to="/login">
           ログイン

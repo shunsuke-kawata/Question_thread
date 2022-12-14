@@ -76,10 +76,8 @@ func SignupModel(email string, nickname string, password string) (*User, error) 
 	}
 	encryptPw, err := crypt.PasswordEncrypt(password)
 	if err != nil {
-		fmt.Println("An error occurred while encrypting the password.", err)
+		err := errors.New("An error occurred while encrypting the password.")
 		return nil, err
-	} else {
-		fmt.Println("fjgieowjfgeiowjgiirhgofe")
 	}
 
 	signinUser = User{Email: email, Nickname: nickname, Password: encryptPw}
@@ -104,6 +102,7 @@ func LoginModel(email string, password string) (*User, error) {
 
 	err := crypt.CompareHashAndPassword(loginUser.Password, password)
 	if err != nil {
+		err := errors.New("Password did not match.")
 		fmt.Println("Password did not match.", err)
 		return nil, err
 	} else {
@@ -111,5 +110,13 @@ func LoginModel(email string, password string) (*User, error) {
 	}
 
 	return &loginUser, nil
+
+}
+
+func NewQuestionModel(title string, body string) (*Question, error) {
+	newQuestion := Question{Title: title, Body: body}
+	db.Create(&newQuestion)
+
+	return &newQuestion, nil
 
 }

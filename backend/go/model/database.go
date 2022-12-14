@@ -158,7 +158,6 @@ func GetDataModel() ([]byte, error) {
 
 		} else {
 			response = append(response, outputJson...)
-
 		}
 
 	}

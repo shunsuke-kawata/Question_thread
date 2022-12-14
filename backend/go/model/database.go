@@ -155,7 +155,6 @@ func GetDataModel() ([]byte, error) {
 		if err != nil {
 			fmt.Println(err)
 			return nil, err
-
 		} else {
 			response = append(response, outputJson...)
 		}

@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { TextField, Stack, Button, TextareaAutosize } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "../css/QuestionForm.css";
 
 const QuestionForm = () => {
+  let navigate = useNavigate();
   //データを登録するためのフックステート
   const {
     register,
@@ -15,6 +17,7 @@ const QuestionForm = () => {
     try {
       await axios.post(process.env.REACT_APP_HOST_URL + "/questionPost", data);
       reset();
+      navigate("/");
     } catch (err) {
       console.log(err);
     } finally {

@@ -93,5 +93,4 @@ func CreateRouter() *gin.Engine {
 	router.POST("/questionPost", QuestionPostRouter)
 
 	return router
-
 }

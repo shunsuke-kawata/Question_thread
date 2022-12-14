@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/shunsuke-kawata/Question_thread/go/model"
 )
 
 type SignupUser struct {
@@ -24,8 +25,7 @@ type PostQuestion struct {
 }
 
 // 3000/signinからのpostを取得する
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 func SignupRouter(c *gin.Context) {
 	var signupUser SignupUser
 	c.BindJSON(&signupUser)
@@ -36,19 +36,6 @@ func SignupRouter(c *gin.Context) {
 		return
 	}
 	fmt.Println(user)
-=======
-=======
->>>>>>> parent of 3d9983c (create サインイン機能を作成)
-func SigninRouter(c *gin.Context) {
-	var signinUser SigninUser
-	c.BindJSON(&signinUser)
-	fmt.Println(signinUser.Email, signinUser.Nickname, signinUser.Password)
-	fmt.Println(c.ContentType())
-<<<<<<< HEAD
->>>>>>> parent of 3d9983c (create サインイン機能を作成)
-=======
->>>>>>> parent of 3d9983c (create サインイン機能を作成)
-
 }
 
 // 3000/loginからのpostを取得する

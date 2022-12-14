@@ -41,7 +41,6 @@ type Comment struct {
 	UpdatedAt  time.Time
 }
 
-// データベースとそのエラー
 var db *gorm.DB
 var err error
 
@@ -54,6 +53,7 @@ func init() {
 	dsn := "user:password@tcp(backend-db-mysql:3306)/question_thread_db?charset=utf8mb4&parseTime=true"
 
 	//データベースに接続する
+
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("failed")
@@ -61,6 +61,7 @@ func init() {
 		fmt.Println("successed")
 	}
 	//作成したデータベースに対してスキーマをマイグレーションする
+
 	db.AutoMigrate(&User{}, &Question{}, &Comment{})
 
 }

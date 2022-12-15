@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -14,6 +15,7 @@ import (
 
 // データベースのスキーマ
 type User struct {
+	gorm.Model
 	ID        uint `gorm:"primaryKey"`
 	Nickname  string
 	Email     string
@@ -23,6 +25,7 @@ type User struct {
 }
 
 type Question struct {
+	gorm.Model
 	ID        uint `gorm:"primaryKey"`
 	Title     string
 	Body      string
@@ -33,28 +36,13 @@ type Question struct {
 }
 
 type Comment struct {
-	ID         uint `gorm:"primaryKey"`
-	Body       string
-	UserID     uint
+	gorm.Model
+	Body string
+	// UserID     uint
 	QuestionID uint
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 }
-
-// type QuestionJson struct {
-// 	// ID        uint      `json:"id"`
-// 	Title string `json:"title"`
-// 	Body  string `json:"body"`
-// }
-
-// type Response struct {
-// 	Questions []QuestionJson `json:"questions"`
-// }
-
-// UserID    uint      `json:"userid"`
-// Comments  []Comment `json:"comments"`
-// CreatedAt time.Time `json:"created_at"`
-// UpdatedAt time.Time `json:"updated_at"`
 
 var db *gorm.DB
 var err error
@@ -129,11 +117,20 @@ func LoginModel(email string, password string) (*User, error) {
 }
 
 func NewQuestionModel(title string, body string) (*Question, error) {
-	newQuestion := Question{Title: title, Body: body}
-	db.Create(&newQuestion)
+	comment := Comment{
+		Body: "テストコメント",
+	}
+	// comment := Comment{
+	// 	Body: "testコメント",
+	// }
+	// comments = append(comments, comment)
+
+	// fmt.Println(comments)
+
+	newQuestion := Question{Title: title, Body: body, Comments: []Comment{comment}}
+	db.Debug().Create(&newQuestion)
 
 	return &newQuestion, nil
-
 }
 
 func GetDataModel() ([]Question, error) {
@@ -141,27 +138,23 @@ func GetDataModel() ([]Question, error) {
 
 	//mysqlからデータ一覧の取得
 	db.Debug().Find(&questions)
-	fmt.Printf("%T\n", questions)
 
 	return questions, nil
 
 }
 
-// response := new(Response)
+func GetCommentsModel(parameter string) ([]Comment, error) {
 
-// var array []QuestionJson
-// //gorm.DBの中をforで回す
+	fmt.Printf("%T\n", parameter)
+	questionID, _ := strconv.Atoi(parameter)
+	comments := []Comment{}
+	db.Debug().Find(&comments, "question_id = ?", questionID)
+	fmt.Println(comments)
+	return comments, nil
+}
 
-// for _, question := range questions {
-// 	//json構造の定義
-// 	questionJson := QuestionJson{}
-// 	questionJson.Title = question.Title
-// 	questionJson.Body = question.Body
-// 	array = append(array, QuestionJson{
-// 		Title: question.Title,
-// 		Body:  question.Body,
-// 	})
-// }
-// response.Questions = array
-
-// return response, nil
+// ログイン時に使用する
+// 0のユーザーはログインしていない
+func LoggedIn(question Question) bool {
+	return question.UserID != 0
+}

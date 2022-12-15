@@ -6,17 +6,21 @@ const Details = ({
   setQuestionOrDetail,
 }) => {
   const clickHandle = () => {
-    setClickedQuestion("none");
+    setClickedQuestion({});
     setQuestionOrDetail(false);
   };
 
-  if (clickedQuestion === "none") {
+  if (clickedQuestion === {}) {
     return <></>;
   }
   return (
     <>
-      <p id="test">{clickedQuestion}</p>
-      <button onClick={() => clickHandle()}>閉じる</button>
+      <div id="detailDiv">
+        <h1>{clickedQuestion.Title}</h1>
+        <p>{clickedQuestion.Body}</p>
+        <p>{clickedQuestion.CreatedAt}</p>
+        <button onClick={() => clickHandle()}>閉じる</button>
+      </div>
     </>
   );
 };

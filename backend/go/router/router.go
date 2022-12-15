@@ -35,8 +35,10 @@ func SignupRouter(c *gin.Context) {
 		c.JSON(400, err.Error())
 		fmt.Println(err)
 		return
+	} else {
+		fmt.Println(user)
+		c.JSON(201, nil)
 	}
-	fmt.Println(user)
 }
 
 // 3000/loginからのpostを取得する
@@ -66,6 +68,7 @@ func QuestionPostRouter(c *gin.Context) {
 		return
 	} else {
 		fmt.Println(newQuestion)
+		c.JSON(201, nil)
 	}
 
 }
@@ -81,6 +84,19 @@ func GetDataRouter(c *gin.Context) {
 	}
 }
 
+func GetCommentsRouter(c *gin.Context) {
+	id := c.Param("id")
+	fmt.Println("-------id---------", id)
+	comments, err := model.GetCommentsModel(id)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("--00----------", comments)
+		c.JSON(200, comments)
+		fmt.Printf("%T\n", comments)
+	}
+
+}
 func CreateRouter() *gin.Engine {
 	//routerのインスタンスを作成
 	router := gin.Default()
@@ -109,6 +125,7 @@ func CreateRouter() *gin.Engine {
 	router.POST("/login", LoginRouter)
 	router.POST("/questionPost", QuestionPostRouter)
 	router.GET("/getData", GetDataRouter)
+	router.GET("/getComments/:id", GetCommentsRouter)
 
 	return router
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import QuestionArea from "./QuestionArea";
-import { dummyData, dummyUser } from "../DummyDatas";
+import { dummyUser } from "../DummyDatas";
 import Details from "./Details";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,9 +10,12 @@ import Common from "./Common";
 
 const Main = () => {
   const [questionOrDetail, setQuestionOrDetail] = useState(false);
-  const [clickedQuestion, setClickedQuestion] = useState("none");
+  const [clickedQuestion, setClickedQuestion] = useState({});
+
+  //データベースから取得したデータ一覧を格納するステートフック
   const [allData, setAllData] = useState([]);
-  const data = dummyData;
+  //データベースから対応するコメントいちらんを取得する
+  const [comments, setComments] = useState([]);
 
   const getAllQuestion = async () => {
     try {
@@ -20,7 +23,6 @@ const Main = () => {
         .get(process.env.REACT_APP_HOST_URL + "/getData")
         .then((response) => {
           //表示するデータを作成
-          console.log(typeof response.data);
           setAllData(response.data);
         });
     } catch {
@@ -32,7 +34,7 @@ const Main = () => {
     await getAllQuestion();
   }, []);
 
-  if (!allData) return <p>Loading</p>;
+  if (!allData) return <p>Loading...</p>;
   return (
     <>
       <Common dummyUser={dummyUser} />
@@ -45,6 +47,7 @@ const Main = () => {
       ) : (
         <QuestionArea
           data={allData}
+          setComments={setComments}
           setClickedQuestion={setClickedQuestion}
           setQuestionOrDetail={setQuestionOrDetail}
         />

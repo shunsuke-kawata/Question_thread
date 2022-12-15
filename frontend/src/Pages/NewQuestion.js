@@ -5,7 +5,7 @@ const NewQuestion = () => {
   return (
     <>
       <Common />
-      <h2 id="newQuestionTitle">質問作成</h2>
+      <h2 id="newQuestionTitle">投稿する</h2>
       <QuestionForm />
     </>
   );

@@ -17,11 +17,15 @@ const QuestionArea = ({ data, setClickedQuestion, setQuestionOrDetail }) => {
   //処理を記述
   //データがない時表示なし
 
+  for (var i = 0; i < display_data.length; i++) {
+    console.log(display_data[i]);
+  }
+
   if (!data) return <></>;
   const map_data = display_data.map((datum) => (
     <Question
       datum={datum}
-      key={datum.id}
+      key={datum.ID}
       setQuestionOrDetail={setQuestionOrDetail}
       setClickedQuestion={setClickedQuestion}
     />

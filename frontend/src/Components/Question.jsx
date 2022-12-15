@@ -4,16 +4,16 @@ import "../css/Question.css";
 const Question = ({ datum, setClickedQuestion, setQuestionOrDetail }) => {
   const clickHandle = () => {
     setQuestionOrDetail(true);
-    setClickedQuestion(datum.id);
-    console.log(datum.id);
+    setClickedQuestion(datum.ID);
+    console.log(datum.ID);
   };
   return (
     <div className="question_body" onClick={() => clickHandle()}>
       <div className="titleDiv">
-        <h3 className="questionElements">・{datum.title}</h3>
+        <h3 className="questionElements">・{datum.Title}</h3>
       </div>
       <div className="bodyDiv">
-        <p className="questionElements">{datum.body}</p>
+        <p className="questionElements">{datum.Body}</p>
       </div>
       <div className="infoDiv">
         <p>回答数：{datum.answerCount}</p>

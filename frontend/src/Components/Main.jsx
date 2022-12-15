@@ -6,6 +6,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Common from "./Common";
 
+//バックエンドにgetリクエストを送り、質問一覧を取得する
+const getAllQuestion = async () => {
+  try {
+    await axios
+      .get(process.env.REACT_APP_HOST_URL + "/getData")
+      .then((response) => console.log(response));
+  } catch {
+    console.log("error");
+  }
+};
+
 const Main = () => {
   const [questionOrDetail, setQuestionOrDetail] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState("none");
@@ -13,13 +24,8 @@ const Main = () => {
 
   //mainコンポーネントが呼び出されるときに実行される
   useEffect(() => {
-    try {
-      axios
-        .get(process.env.REACT_APP_HOST_URL + "/getData")
-        .then((response) => console.log(response));
-    } catch {
-      console.log("error");
-    }
+    const allData = getAllQuestion();
+    console.log(allData);
   }, []);
   return (
     <>

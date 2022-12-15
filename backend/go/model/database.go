@@ -1,7 +1,6 @@
 package model
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -42,15 +41,20 @@ type Comment struct {
 	UpdatedAt  time.Time
 }
 
-type JsonData struct {
-	ID        uint      `json:"id"`
-	Title     string    `json:"title"`
-	Body      string    `json:"body"`
-	UserID    uint      `json:"userid"`
-	Comments  []Comment `json:"comments"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-}
+// type QuestionJson struct {
+// 	// ID        uint      `json:"id"`
+// 	Title string `json:"title"`
+// 	Body  string `json:"body"`
+// }
+
+// type Response struct {
+// 	Questions []QuestionJson `json:"questions"`
+// }
+
+// UserID    uint      `json:"userid"`
+// Comments  []Comment `json:"comments"`
+// CreatedAt time.Time `json:"created_at"`
+// UpdatedAt time.Time `json:"updated_at"`
 
 var db *gorm.DB
 var err error
@@ -132,34 +136,32 @@ func NewQuestionModel(title string, body string) (*Question, error) {
 
 }
 
-func GetDataModel() ([]byte, error) {
+func GetDataModel() ([]Question, error) {
 	questions := []Question{}
+
+	//mysqlからデータ一覧の取得
 	db.Debug().Find(&questions)
 	fmt.Printf("%T\n", questions)
 
-	//gorm.DBの中をforで回す
-
-	var response []byte
-
-	for _, question := range questions {
-		jsonData := JsonData{}
-		jsonData.ID = question.ID
-		jsonData.Title = question.Title
-		jsonData.Body = question.Body
-		jsonData.CreatedAt = question.CreatedAt
-		jsonData.UpdatedAt = question.UpdatedAt
-		jsonData.Comments = question.Comments
-
-		outputJson, err := json.Marshal(&jsonData)
-
-		if err != nil {
-			fmt.Println(err)
-			return nil, err
-		} else {
-			response = append(response, outputJson...)
-		}
-
-	}
-	return response, nil
+	return questions, nil
 
 }
+
+// response := new(Response)
+
+// var array []QuestionJson
+// //gorm.DBの中をforで回す
+
+// for _, question := range questions {
+// 	//json構造の定義
+// 	questionJson := QuestionJson{}
+// 	questionJson.Title = question.Title
+// 	questionJson.Body = question.Body
+// 	array = append(array, QuestionJson{
+// 		Title: question.Title,
+// 		Body:  question.Body,
+// 	})
+// }
+// response.Questions = array
+
+// return response, nil

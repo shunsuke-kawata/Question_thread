@@ -76,7 +76,7 @@ func GetDataRouter(c *gin.Context) {
 		fmt.Println(err)
 	} else {
 		fmt.Println(result)
-		c.JSON(204, result)
+		c.JSON(200, result)
 		fmt.Printf("%T\n", result)
 	}
 }

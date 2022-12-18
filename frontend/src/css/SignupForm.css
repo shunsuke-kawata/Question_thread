@@ -5,3 +5,7 @@
 .reqFlag{
     display: none;
 }
+
+#afterLogin{
+    color:blue;
+}

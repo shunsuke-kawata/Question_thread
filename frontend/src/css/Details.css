@@ -5,3 +5,21 @@
     margin-right: auto;
     background-color: white;
 }
+
+.titleDiv{
+    background-color: lightgreen;
+
+    word-wrap: break-word;
+}
+
+#questionTitle{
+    text-align: center;
+}
+
+.bodyDiv{
+    word-wrap: break-word;
+    width:90%;
+    margin-left:5%;
+    
+
+}

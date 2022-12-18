@@ -9,13 +9,15 @@ const Question = ({
   setClickedQuestion,
   setQuestionOrDetail,
 }) => {
+  //質問がクリックされたときにトリガーする
   const clickHandle = async () => {
     try {
       await axios
         .get(process.env.REACT_APP_HOST_URL + "/getComments/" + datum.ID)
         .then((response) => {
           //表示するデータを作成
-          setComments(response);
+          setComments(response.data);
+          console.log(response.data);
         });
     } catch {
       console.log("get data failed");
@@ -34,9 +36,7 @@ const Question = ({
         <p className="questionElements">{datum.Body}</p>
       </div>
       <div className="infoDiv">
-        <p>
-          作成時刻：{datum.CreatedAt}　回答数：{datum.Comments}
-        </p>
+        <p>作成時刻：{datum.CreatedAt}</p>
       </div>
     </div>
   );

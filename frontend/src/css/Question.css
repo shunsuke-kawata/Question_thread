@@ -9,20 +9,20 @@
     color: #3f51b5;
 }
 .questionElements{
-    text-align: center;
     padding: 0 5px 0 5px;
    
 }
 
 .titleDiv{
     background-color: lightgreen;
-
+    text-align: center;
     word-wrap: break-word;
 }
 .bodyDiv{
     word-wrap: break-word;
     width:90%;
     margin-left:5%;
+    text-align: left;
 }
 
 .infoDiv{

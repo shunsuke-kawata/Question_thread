@@ -4,7 +4,12 @@ import { useState } from "react";
 import "../css/QuestionArea.css";
 import IndexArea from "./IndexArea";
 
-const QuestionArea = ({ data, setClickedQuestion, setQuestionOrDetail }) => {
+const QuestionArea = ({
+  data,
+  setComments,
+  setClickedQuestion,
+  setQuestionOrDetail,
+}) => {
   //配列の長さを保持する
   const [index, setIndex] = useState(1);
   var display_head = (index - 1) * 10;
@@ -17,15 +22,16 @@ const QuestionArea = ({ data, setClickedQuestion, setQuestionOrDetail }) => {
   //処理を記述
   //データがない時表示なし
 
-  for (var i = 0; i < display_data.length; i++) {
-    console.log(display_data[i]);
-  }
+  // for (var i = 0; i < display_data.length; i++) {
+  //   console.log(display_data[i]);
+  // }
 
   if (!data) return <></>;
   const map_data = display_data.map((datum) => (
     <Question
       datum={datum}
       key={datum.ID}
+      setComments={setComments}
       setQuestionOrDetail={setQuestionOrDetail}
       setClickedQuestion={setClickedQuestion}
     />

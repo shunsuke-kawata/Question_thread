@@ -40,6 +40,7 @@ const Main = () => {
       <Common dummyUser={dummyUser} />
       {questionOrDetail ? (
         <Details
+          comments={comments}
           clickedQuestion={clickedQuestion}
           setClickedQuestion={setClickedQuestion}
           setQuestionOrDetail={setQuestionOrDetail}

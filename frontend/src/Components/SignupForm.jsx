@@ -72,7 +72,9 @@ const SignupForm = () => {
           >
             サインイン
           </Button>
-          <Link to="/login">すでにログイン済みの場合はこちら</Link>
+          <Link id="afterLogin" to="/login">
+            すでにログイン済みの場合はこちら
+          </Link>
         </Stack>
       </form>
     </>

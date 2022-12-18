@@ -5,3 +5,7 @@
 .reqFlag{
     display: none;
 }
+
+#beforeLogin{
+    color: blue;
+}

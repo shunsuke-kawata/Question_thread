@@ -24,6 +24,12 @@ type PostQuestion struct {
 	Body  string
 }
 
+type PostComment struct {
+	Qid  string
+	Uid  string
+	Body string
+}
+
 // 3000/signinからのpostを取得する
 
 func SignupRouter(c *gin.Context) {
@@ -97,6 +103,21 @@ func GetCommentsRouter(c *gin.Context) {
 	}
 
 }
+
+func CommentPostRouter(c *gin.Context) {
+	var postComment PostComment
+	c.BindJSON(&postComment)
+	newComment, err := model.NewCommentModel(postComment.Qid, postComment.Uid, postComment.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(newComment)
+		c.JSON(201, nil)
+	}
+	fmt.Println(postComment.Qid, postComment.Uid, postComment.Body)
+
+}
 func CreateRouter() *gin.Engine {
 	//routerのインスタンスを作成
 	router := gin.Default()
@@ -120,12 +141,13 @@ func CreateRouter() *gin.Engine {
 		},
 	}))
 
-	//ルーティング→corsの後にする
+	//ルーティング→corsの設定の後にする
 	router.POST("/signup", SignupRouter)
 	router.POST("/login", LoginRouter)
 	router.POST("/questionPost", QuestionPostRouter)
 	router.GET("/getData", GetDataRouter)
 	router.GET("/getComments/:id", GetCommentsRouter)
+	router.POST("/commentPost", CommentPostRouter)
 
 	return router
 }

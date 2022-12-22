@@ -47,7 +47,7 @@ type Comment struct {
 var db *gorm.DB
 var err error
 
-// importしたときに呼ばれる(packageがmainでないため)
+// importしたときに自動的に呼ばれる(packageがmainでないため)
 func init() {
 	//dsn
 	err := godotenv.Load(os.Getenv("DSN"))
@@ -59,12 +59,11 @@ func init() {
 
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println("failed")
+		fmt.Println("database access failed")
 	} else {
-		fmt.Println("successed")
+		fmt.Println("database access successed")
 	}
 	//作成したデータベースに対してスキーマをマイグレーションする
-
 	db.AutoMigrate(&User{}, &Question{}, &Comment{})
 
 }
@@ -117,17 +116,11 @@ func LoginModel(email string, password string) (*User, error) {
 }
 
 func NewQuestionModel(title string, body string) (*Question, error) {
-	comment := Comment{
-		Body: "テストコメント",
-	}
 	// comment := Comment{
-	// 	Body: "testコメント",
+	// 	Body: "テストコメント",
 	// }
-	// comments = append(comments, comment)
 
-	// fmt.Println(comments)
-
-	newQuestion := Question{Title: title, Body: body, Comments: []Comment{comment}}
+	newQuestion := Question{Title: title, Body: body, Comments: []Comment{}}
 	db.Debug().Create(&newQuestion)
 
 	return &newQuestion, nil
@@ -151,6 +144,17 @@ func GetCommentsModel(parameter string) ([]Comment, error) {
 	db.Debug().Find(&comments, "question_id = ?", questionID)
 	fmt.Println(comments)
 	return comments, nil
+}
+
+func NewCommentModel(qid string, uid string, body string) (*Comment, error) {
+	convertedQid, _ := strconv.ParseUint(qid, 10, 64)
+	convertedUid, _ := strconv.ParseUint(uid, 10, 64)
+	fmt.Println(convertedUid)
+	newComment := Comment{Body: body, QuestionID: uint(convertedQid)}
+	db.Debug().Create(&newComment)
+
+	return &newComment, nil
+
 }
 
 // ログイン時に使用する

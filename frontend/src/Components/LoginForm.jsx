@@ -62,7 +62,7 @@ const LoginForm = () => {
             ログイン
           </Button>
           <Link id="beforeLogin" to="/signup">
-            サインインする
+            サインアップする
           </Link>
         </Stack>
       </form>

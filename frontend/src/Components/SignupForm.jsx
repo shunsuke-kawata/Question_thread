@@ -70,7 +70,7 @@ const SignupForm = () => {
             size="large"
             onClick={handleSubmit(onSubmit)}
           >
-            サインイン
+            サインアップ
           </Button>
           <Link id="afterLogin" to="/login">
             すでにログイン済みの場合はこちら

@@ -6,15 +6,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Common from "./Common";
 
-//バックエンドにgetリクエストを送り、質問一覧を取得する
-
 const Main = () => {
   const [questionOrDetail, setQuestionOrDetail] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState({});
-
-  //データベースから取得したデータ一覧を格納するステートフック
   const [allData, setAllData] = useState([]);
-  //データベースから対応するコメントいちらんを取得する
   const [comments, setComments] = useState([]);
 
   const getAllQuestion = async () => {

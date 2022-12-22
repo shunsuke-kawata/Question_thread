@@ -1,5 +1,8 @@
 import "../css/Details.css";
 import Comment from "./Comment";
+import { Button } from "@mui/material";
+import { useState } from "react";
+import CommentForm from "./CommentForm";
 
 const Details = ({
   comments,
@@ -12,11 +15,15 @@ const Details = ({
     setQuestionOrDetail(false);
   };
 
+  //コメント追加フォームの表示を制御するステートフック
+  const [showFormFlag, setShowFormFlag] = useState(false);
+
+  //コメントデータを一覧表示
   const displayComments = comments.map((comment) => (
     <Comment comment={comment} key={comment.ID} />
   ));
-  console.log(clickedQuestion);
 
+  //エラーの場合空タグを表示する
   if (clickedQuestion === {}) {
     return <></>;
   }
@@ -35,8 +42,24 @@ const Details = ({
         </div>
 
         <div className="comments">{displayComments}</div>
-        <button onClick={() => clickHandle()}>閉じる</button>
+        {showFormFlag ? (
+          <CommentForm
+            clickedQuestion={clickedQuestion}
+            setShowFormFlag={setShowFormFlag}
+          />
+        ) : (
+          <Button
+            id="commentFormButton"
+            color="primary"
+            variant="contained"
+            size="small"
+            onClick={() => setShowFormFlag(true)}
+          >
+            + 回答を追加
+          </Button>
+        )}
       </div>
+      <button onClick={() => clickHandle()}>戻る</button>
     </>
   );
 };

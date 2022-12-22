@@ -17,7 +17,13 @@
     background-color: lightgreen;
     text-align: center;
     word-wrap: break-word;
+    height: fit-content;
 }
+
+#titleEle{
+    vertical-align:middle;
+}
+
 .bodyDiv{
     word-wrap: break-word;
     width:90%;

@@ -1,7 +1,8 @@
 import React from "react";
+import "../css/Comment.css";
 
-const Comment = ({ comment, key }) => {
-  console.log(comment, key);
+const Comment = ({ comment }) => {
+  console.log(comment);
 
   return (
     <>

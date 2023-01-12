@@ -8,6 +8,8 @@ services:
         context: .
         dockerfile : ./Dockerfile
       #環境変数
+      env_file:
+       - ./.env
       environment:
         - GO_PORT
       stdin_open: true
@@ -20,6 +22,8 @@ services:
     db:
       image: mysql:8.0
       container_name: backend-db-mysql
+      env_file:
+       - ./.env
       environment:
         #スーパーユーザであるrootアカウントに設定するパスワード
         MYSQL_ROOT_PASSWORD: root
@@ -36,5 +40,13 @@ services:
         - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       ports:
         - ${DB_PORT}:${DB_PORT}
+      
+    redis:
+      image: "redis:latest"
+      container_name: backend-redis
+      env_file:
+       - ./.env
+      ports:
+        - ${REDIS_PORT}:${REDIS_PORT}
     
 

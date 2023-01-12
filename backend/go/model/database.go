@@ -89,6 +89,8 @@ func SignupModel(email string, nickname string, password string) (*User, error) 
 
 }
 
+// ログインを行うモデル
+// ログインの際にセッションを作成
 func LoginModel(email string, password string) (*User, error) {
 	loginUser := User{}
 	db.Debug().Where("email = ?", email).First(&loginUser)
@@ -116,9 +118,6 @@ func LoginModel(email string, password string) (*User, error) {
 }
 
 func NewQuestionModel(title string, body string) (*Question, error) {
-	// comment := Comment{
-	// 	Body: "テストコメント",
-	// }
 
 	newQuestion := Question{Title: title, Body: body, Comments: []Comment{}}
 	db.Debug().Create(&newQuestion)
@@ -161,4 +160,5 @@ func NewCommentModel(qid string, uid string, body string) (*Comment, error) {
 // 0のユーザーはログインしていない
 func LoggedIn(question Question) bool {
 	return question.UserID != 0
+
 }

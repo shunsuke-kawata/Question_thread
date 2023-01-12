@@ -63,6 +63,18 @@ const SignupForm = () => {
             })}
           />
           <p className="error-sentence">{errors.password?.message}</p>
+          <TextField
+            className="signupField"
+            autoComplete="off"
+            required
+            label="再確認用パスワード"
+            placeholder="パスワードをもう一度入力してください"
+            type="password"
+            {...register("confirmPassword", {
+              minLength: 6,
+              required: "confirmPassword is required field",
+            })}
+          />
           <Button
             id="signupButton"
             color="primary"

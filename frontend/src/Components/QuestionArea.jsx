@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "./Question";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/QuestionArea.css";
 import IndexArea from "./IndexArea";
 
@@ -19,14 +20,25 @@ const QuestionArea = ({
   }
 
   const display_data = data.slice(display_head, display_tail);
+  console.log(display_data.length);
   //処理を記述
   //データがない時表示なし
 
-  // for (var i = 0; i < display_data.length; i++) {
-  //   console.log(display_data[i]);
-  // }
-
   if (!data) return <></>;
+  //質問がまだ投稿されていないとき
+  if (data.length === 0) {
+    return (
+      <>
+        <IndexArea index={index} data={data} setIndex={setIndex} />
+        <div id="noQuestionDiv">
+          <p>まだ質問が投稿されていません</p>
+          <Link id="linkUrl" to="/newQuestion">
+            質問を追加する
+          </Link>
+        </div>
+      </>
+    );
+  }
   const map_data = display_data.map((datum) => (
     <Question
       datum={datum}

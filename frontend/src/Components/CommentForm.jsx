@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import "../css/CommentForm.css";
 import { TextareaAutosize, Button } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,6 +21,7 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
       alert(err.response.data);
     } finally {
       console.log(data);
+      navigate("/");
     }
   };
 
@@ -41,10 +44,17 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
           id="commentPostButton"
           color="primary"
           variant="contained"
-          size="large"
+          size="small"
           onClick={handleSubmit(onSubmit)}
         >
           投稿する
+        </Button>
+        <Button
+          id="quitButton"
+          size="small"
+          onClick={() => setShowFormFlag(false)}
+        >
+          やめる
         </Button>
       </div>
     </>

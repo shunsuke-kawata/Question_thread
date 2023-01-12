@@ -1,17 +1,22 @@
 package router
 
 import (
+	"errors"
 	"fmt"
+	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/shunsuke-kawata/Question_thread/go/model"
+	"github.com/shunsuke-kawata/Question_thread/go/redis"
 )
 
 type SignupUser struct {
-	Email    string
-	Nickname string
-	Password string
+	Email           string
+	Nickname        string
+	Password        string
+	ConfirmPassword string
 }
 
 type LoginUser struct {
@@ -35,7 +40,13 @@ type PostComment struct {
 func SignupRouter(c *gin.Context) {
 	var signupUser SignupUser
 	c.BindJSON(&signupUser)
-	fmt.Println(signupUser.Email, signupUser.Nickname, signupUser.Password)
+	fmt.Println(signupUser.Email, signupUser.Nickname, signupUser.Password, signupUser.ConfirmPassword)
+	if signupUser.Password != signupUser.ConfirmPassword {
+		err := errors.New("password and password to confirm don't match")
+		c.JSON(400, err.Error())
+		fmt.Println(err)
+		return
+	}
 	user, err := model.SignupModel(signupUser.Email, signupUser.Nickname, signupUser.Password)
 	if err != nil {
 		c.JSON(400, err.Error())
@@ -43,6 +54,7 @@ func SignupRouter(c *gin.Context) {
 		return
 	} else {
 		fmt.Println(user)
+		//responseを返す
 		c.JSON(201, nil)
 	}
 }
@@ -58,6 +70,8 @@ func LoginRouter(c *gin.Context) {
 		return
 	} else {
 		fmt.Println(user)
+		cookieKey := os.Getenv("LOGIN_USER_ID_KEY")
+		redis.NewSession(c, cookieKey, loginUser.Email)
 	}
 
 }
@@ -92,12 +106,10 @@ func GetDataRouter(c *gin.Context) {
 
 func GetCommentsRouter(c *gin.Context) {
 	id := c.Param("id")
-	fmt.Println("-------id---------", id)
 	comments, err := model.GetCommentsModel(id)
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println("--00----------", comments)
 		c.JSON(200, comments)
 		fmt.Printf("%T\n", comments)
 	}
@@ -118,6 +130,7 @@ func CommentPostRouter(c *gin.Context) {
 	fmt.Println(postComment.Qid, postComment.Uid, postComment.Body)
 
 }
+
 func CreateRouter() *gin.Engine {
 	//routerのインスタンスを作成
 	router := gin.Default()
@@ -142,12 +155,48 @@ func CreateRouter() *gin.Engine {
 	}))
 
 	//ルーティング→corsの設定の後にする
+
+	// loginCheckGroup := router.Group("/", checkLogin())
+	// {
+	// }
+	router.GET("/getData", GetDataRouter)
 	router.POST("/signup", SignupRouter)
 	router.POST("/login", LoginRouter)
 	router.POST("/questionPost", QuestionPostRouter)
-	router.GET("/getData", GetDataRouter)
 	router.GET("/getComments/:id", GetCommentsRouter)
 	router.POST("/commentPost", CommentPostRouter)
 
 	return router
+}
+
+// ログインしているかを判定する
+func checkLogin() gin.HandlerFunc {
+	fmt.Println("----------------------------")
+	return func(c *gin.Context) {
+		//環境変数を取得
+		cookieKey := os.Getenv("LOGIN_USER_ID_KEY")
+		id := redis.GetSession(c, cookieKey)
+		if id == nil {
+			c.Redirect(http.StatusFound, "/login")
+			c.Abort()
+		} else {
+			c.Next()
+		}
+	}
+
+}
+
+// ログアウトしているかを判定する
+func checkLogout() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		//環境変数を取得
+		cookieKey := os.Getenv("LOGIN_USER_ID_KEY")
+		id := redis.GetSession(c, cookieKey)
+		if id != nil {
+			c.Redirect(http.StatusFound, "/")
+			c.Abort()
+		} else {
+			c.Next()
+		}
+	}
 }

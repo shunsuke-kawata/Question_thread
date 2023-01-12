@@ -26,6 +26,7 @@ const Question = ({
 
     console.log(datum.ID);
   };
+
   return (
     <div className="question_body" onClick={() => clickHandle()}>
       <div className="titleDiv">
@@ -37,7 +38,7 @@ const Question = ({
         <p className="questionElements">{datum.Body}</p>
       </div>
       <div className="infoDiv">
-        <p>作成時刻：{datum.CreatedAt}</p>
+        <p>{datum.CreatedAt}</p>
       </div>
     </div>
   );

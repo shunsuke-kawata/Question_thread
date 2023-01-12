@@ -25,6 +25,7 @@ const Details = ({
 
   //エラーの場合空タグを表示する
   if (clickedQuestion === {}) {
+    console.log("hgjkfaseprfgnbkmx");
     return <></>;
   }
 
@@ -48,18 +49,22 @@ const Details = ({
             setShowFormFlag={setShowFormFlag}
           />
         ) : (
-          <Button
-            id="commentFormButton"
-            color="primary"
-            variant="contained"
-            size="small"
-            onClick={() => setShowFormFlag(true)}
-          >
-            + 回答を追加
-          </Button>
+          <>
+            <Button
+              id="commentFormButton"
+              color="primary"
+              variant="contained"
+              size="small"
+              onClick={() => setShowFormFlag(true)}
+            >
+              + 回答を追加
+            </Button>
+            <Button id="returnButton" onClick={() => clickHandle()}>
+              質問一覧に戻る
+            </Button>
+          </>
         )}
       </div>
-      <button onClick={() => clickHandle()}>戻る</button>
     </>
   );
 };

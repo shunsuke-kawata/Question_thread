@@ -7,9 +7,25 @@
 .commentBody{
     background-color: white;
     width: 90%;
-    margin:0 5% 20px 5%;
+    margin:0 5% 5px 5%;
 }
 
 #commentForm{
-    position: relative;
+    margin-top: 20px;
+    padding:10px 0;
+    
+    background-color: white;
+    position: absolute;
+    width: 100%;
+
+}
+
+
+#commentPostButton{
+    margin: 0 auto 0 46%;
+}
+
+#quitButton{
+    position: absolute;
+    right:10px;
 }

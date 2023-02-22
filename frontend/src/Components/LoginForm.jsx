@@ -14,9 +14,17 @@ const LoginForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      await axios.post(process.env.REACT_APP_HOST_URL + "/login", data);
-      reset();
-      navigate("/");
+      await axios
+        .post(process.env.REACT_APP_HOST_URL + "/login", data)
+        .then((response) => {
+          console.log(response.data, response.data.Email);
+
+          //localstorageにnicknameとパスワードを保存
+          localStorage.setItem("nickname", response.data.Nickname);
+          localStorage.setItem("email", response.data.Email);
+          reset();
+          navigate("/");
+        });
     } catch (err) {
       alert(err.response.data);
     } finally {

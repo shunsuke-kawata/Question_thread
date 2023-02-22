@@ -9,6 +9,9 @@ const Comment = ({ comment }) => {
       <div className="commentDiv">
         <p>・{comment.Body}</p>
       </div>
+      <div className="infoDiv">
+        <p>{comment.CreatedAt}</p>
+      </div>
     </>
   );
 };

@@ -11,8 +11,8 @@
 }
 
 #commentForm{
-    margin-top: 20px;
-    padding:10px 0;
+    margin-top: 50px;
+    padding:20px 0;
     
     background-color: white;
     position: absolute;
@@ -22,7 +22,7 @@
 
 
 #commentPostButton{
-    margin: 0 auto 0 46%;
+    margin-left:10px;
 }
 
 #quitButton{

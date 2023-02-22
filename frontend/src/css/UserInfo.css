@@ -4,10 +4,32 @@
     line-height: 4px;
     right:2%;
 }
-.infomation:hover{
-    background-color: red;;
+
+.infomation:hover .hover_display{
+    display: inline;
+}
+
+.hover_display{
+    border: 2px solid black;
+    position: absolute;
+    display: none; 
+    top:20%;
+    right: 0%;
+    width: 240px;
+    height: 140px;
+    background-color: #3f51b5;
+    padding-left: 15px;
 }
 .info_child{
     text-align: right;
+}
+
+.hover_label{
+    padding-bottom: 3px;
+}
+
+.hover_element{
+    padding-bottom: 5px;
+    padding-left: 20px;
 }
 

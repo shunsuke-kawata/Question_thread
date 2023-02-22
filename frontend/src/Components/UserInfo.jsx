@@ -31,13 +31,29 @@ const UserInfo = () => {
       <div className="infomation">
         {infoFlag ? (
           <>
-            <p className="info_child">{name}</p>
-            <p className="info_child">{mail}</p>
+            <div className="info_div">
+              <p className="info_child">{name}</p>
+              <p className="info_child">{mail}</p>
+            </div>
+            <div className="hover_display">
+              <h4 className="hover_label">ユーザーネーム</h4>
+              <h1 className="hover_element">{name}</h1>
+              <h4 className="hover_label">メールアドレス</h4>
+              <h1 className="hover_element">{mail}</h1>
+            </div>
           </>
         ) : (
           <>
-            <p className="info_child">Guest</p>
-            <p className="info_child">Guest@mail.com</p>
+            <div className="info_div">
+              <p className="info_child">Guest</p>
+              <p className="info_child">Guest@mail.com</p>
+            </div>
+            <div className="hover_display">
+              <h4 className="hover_label">ユーザーネーム</h4>
+              <h1 className="hover_element">Guest</h1>
+              <h4 className="hover_label">メールアドレス</h4>
+              <h1 className="hover_element">Guest@mail.com</h1>
+            </div>
           </>
         )}
       </div>

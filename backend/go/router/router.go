@@ -32,6 +32,7 @@ type ResponseInfo struct {
 type PostQuestion struct {
 	Title string
 	Body  string
+	Email string
 }
 
 type PostComment struct {
@@ -84,7 +85,8 @@ func LoginRouter(c *gin.Context) {
 func QuestionPostRouter(c *gin.Context) {
 	var postQuestion PostQuestion
 	c.BindJSON(&postQuestion)
-	newQuestion, err := model.NewQuestionModel(postQuestion.Title, postQuestion.Body)
+
+	newQuestion, err := model.NewQuestionModel(postQuestion.Title, postQuestion.Body, postQuestion.Email)
 
 	if err != nil {
 		c.JSON(400, err.Error())

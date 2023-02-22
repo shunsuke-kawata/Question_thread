@@ -118,12 +118,18 @@ func LoginModel(email string, password string) (*User, error) {
 }
 
 // データベースに新しい質問を投稿する
-func NewQuestionModel(title string, body string) (*Question, error) {
+func NewQuestionModel(title string, body string, email string) (*Question, error) {
+	user := &User{}
+	db.Debug().Select("id").Where("email=?", email).Find(&user)
+	if user.ID == 0 {
+		err := errors.New("not logined user")
+		return nil, err
+	} else {
+		newQuestion := Question{Title: title, Body: body, Comments: []Comment{}, UserID: user.ID}
+		db.Debug().Create(&newQuestion)
 
-	newQuestion := Question{Title: title, Body: body, Comments: []Comment{}}
-	db.Debug().Create(&newQuestion)
-
-	return &newQuestion, nil
+		return &newQuestion, nil
+	}
 }
 
 // データベースから投稿された質問の一覧を取得する

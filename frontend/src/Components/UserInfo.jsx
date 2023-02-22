@@ -15,15 +15,15 @@ const UserInfo = () => {
       setName(nickname);
       setMail(email);
     } else {
-      setName(null);
-      setMail(null);
+      // setName(null);
+      // setMail(null);
       setInfoFlag(false);
     }
     console.log(nickname, email, infoFlag);
   };
 
-  useEffect(() => {
-    setUserInfo();
+  useEffect(async () => {
+    await setUserInfo();
   }, []);
 
   return (

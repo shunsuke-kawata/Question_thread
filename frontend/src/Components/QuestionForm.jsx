@@ -13,13 +13,17 @@ const QuestionForm = () => {
     reset,
     formState: { errors },
   } = useForm();
+  var email = localStorage.getItem("email");
+  register("email", { value: email });
   const onSubmit = async (data) => {
+    console.log(email);
     try {
       await axios.post(process.env.REACT_APP_HOST_URL + "/questionPost", data);
-      reset();
+      // reset();
       navigate("/");
     } catch (err) {
       console.log(err);
+      alert(err.response.data);
     } finally {
       console.log(data);
     }

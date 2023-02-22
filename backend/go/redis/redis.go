@@ -54,10 +54,12 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 // ログインしていない時はgo-redisのGet関数でSession情報が見つからず、err == redis.Nilの判定となる。
 func GetSession(c *gin.Context, cookieKey string) interface{} {
 	redisKey, _ := c.Cookie(cookieKey)
+	fmt.Println(redisKey)
 	redisValue, err := conn.Get(c, redisKey).Result()
+	fmt.Println(redisValue)
 	switch {
 	case err == redis.Nil:
-		fmt.Println("SessionKeyが登録されていません。")
+		fmt.Println("SessionKeyが登録されていません。", err, redisValue)
 		return nil
 	case err != nil:
 		fmt.Println("Session取得時にエラー発生：" + err.Error())

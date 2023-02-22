@@ -24,6 +24,11 @@ type LoginUser struct {
 	Password string
 }
 
+type ResponseInfo struct {
+	Email    string
+	Nickname string
+}
+
 type PostQuestion struct {
 	Title string
 	Body  string
@@ -55,7 +60,7 @@ func SignupRouter(c *gin.Context) {
 	} else {
 		fmt.Println(user)
 		//responseを返す
-		c.JSON(201, nil)
+		c.JSON(200, nil)
 	}
 }
 
@@ -69,9 +74,8 @@ func LoginRouter(c *gin.Context) {
 		fmt.Println(err)
 		return
 	} else {
-		fmt.Println(user)
-		cookieKey := os.Getenv("LOGIN_USER_ID_KEY")
-		redis.NewSession(c, cookieKey, loginUser.Email)
+		response := ResponseInfo{user.Email, user.Nickname}
+		c.JSON(201, response)
 	}
 
 }
@@ -93,13 +97,14 @@ func QuestionPostRouter(c *gin.Context) {
 
 }
 
+// データベースからデータ一覧を取得する
 func GetDataRouter(c *gin.Context) {
 	result, err := model.GetDataModel()
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(result)
-		c.JSON(200, result)
+		c.JSON(201, result)
 		fmt.Printf("%T\n", result)
 	}
 }
@@ -110,10 +115,9 @@ func GetCommentsRouter(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		c.JSON(200, comments)
+		c.JSON(201, comments)
 		fmt.Printf("%T\n", comments)
 	}
-
 }
 
 func CommentPostRouter(c *gin.Context) {
@@ -131,6 +135,7 @@ func CommentPostRouter(c *gin.Context) {
 
 }
 
+// ルーターのインスタンスを作成する
 func CreateRouter() *gin.Engine {
 	//routerのインスタンスを作成
 	router := gin.Default()
@@ -155,14 +160,10 @@ func CreateRouter() *gin.Engine {
 	}))
 
 	//ルーティング→corsの設定の後にする
-
-	// loginCheckGroup := router.Group("/", checkLogin())
-	// {
-	// }
 	router.GET("/getData", GetDataRouter)
+	router.POST("/questionPost", QuestionPostRouter)
 	router.POST("/signup", SignupRouter)
 	router.POST("/login", LoginRouter)
-	router.POST("/questionPost", QuestionPostRouter)
 	router.GET("/getComments/:id", GetCommentsRouter)
 	router.POST("/commentPost", CommentPostRouter)
 
@@ -171,7 +172,6 @@ func CreateRouter() *gin.Engine {
 
 // ログインしているかを判定する
 func checkLogin() gin.HandlerFunc {
-	fmt.Println("----------------------------")
 	return func(c *gin.Context) {
 		//環境変数を取得
 		cookieKey := os.Getenv("LOGIN_USER_ID_KEY")

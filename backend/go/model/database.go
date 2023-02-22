@@ -117,6 +117,7 @@ func LoginModel(email string, password string) (*User, error) {
 
 }
 
+// データベースに新しい質問を投稿する
 func NewQuestionModel(title string, body string) (*Question, error) {
 
 	newQuestion := Question{Title: title, Body: body, Comments: []Comment{}}
@@ -125,6 +126,7 @@ func NewQuestionModel(title string, body string) (*Question, error) {
 	return &newQuestion, nil
 }
 
+// データベースから投稿された質問の一覧を取得する
 func GetDataModel() ([]Question, error) {
 	questions := []Question{}
 

@@ -11,7 +11,8 @@ services:
       env_file:
        - ./.env
       environment:
-        - GO_PORT
+        GO_PORT: 8080
+        
       stdin_open: true
       tty: true
       ports:
@@ -46,6 +47,9 @@ services:
       container_name: backend-redis
       env_file:
        - ./.env
+      environment:
+        LOGIN_USER_ID_KEY: loginUserIdKey
+        REDIS_PORT: 6379
       ports:
         - ${REDIS_PORT}:${REDIS_PORT}
     

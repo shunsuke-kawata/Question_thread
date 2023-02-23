@@ -12,9 +12,28 @@ const SignupForm = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const checkMailFormat = async (address) => {
+    var pattern =
+      /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/;
+    if (pattern.test(address)) {
+      /*パターンにマッチした場合*/
+      return true;
+    } else {
+      /*パターンにマッチしない場合*/
+      return false;
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
-      await axios.post(process.env.REACT_APP_HOST_URL + "/signup", data);
+      var flag = await checkMailFormat(data.email);
+      if (flag) {
+        await axios.post(process.env.REACT_APP_HOST_URL + "/signup", data);
+      } else {
+        alert("email address format is not right");
+        return;
+      }
       reset();
       navigate("/login");
     } catch (err) {
@@ -92,5 +111,4 @@ const SignupForm = () => {
     </>
   );
 };
-
 export default SignupForm;

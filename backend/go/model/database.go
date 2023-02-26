@@ -176,5 +176,4 @@ func NewCommentModel(qid string, uid string, body string, email string) (*Commen
 // 0のユーザーはログインしていない
 func LoggedIn(question Question) bool {
 	return question.UserID != 0
-
 }

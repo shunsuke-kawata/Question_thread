@@ -16,7 +16,6 @@
     top:20%;
     right: 0%;
     width: 240px;
-    height: 140px;
     background-color: #3f51b5;
     padding-left: 15px;
 }
@@ -25,11 +24,24 @@
 }
 
 .hover_label{
-    padding-bottom: 3px;
+    padding-bottom: 5px;
 }
 
 .hover_element{
     padding-bottom: 5px;
     padding-left: 20px;
 }
+
+.route_from_info_button{
+    margin-bottom: 5px;
+    background-color: #3f51b5;
+    border: none;
+    color:white;
+    font-size: 15px;
+}
+
+.route_from_info_button:hover{
+    color:red;
+}
+
 

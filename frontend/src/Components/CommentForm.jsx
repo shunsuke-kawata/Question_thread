@@ -2,10 +2,8 @@ import { useForm } from "react-hook-form";
 import "../css/CommentForm.css";
 import { TextareaAutosize, Button } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
-  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,7 +21,7 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
       alert(err.response.data);
     } finally {
       console.log(data);
-      navigate("/");
+      window.location.reload();
     }
   };
 

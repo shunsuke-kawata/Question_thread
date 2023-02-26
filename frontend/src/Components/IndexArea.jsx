@@ -47,6 +47,7 @@ const IndexArea = ({ index, data, setIndex }) => {
             next
           </Button>
         </Stack>
+        <p id="explain_p">コメントなどをみるときは質問をクリックしてください</p>
       </div>
     </>
   );

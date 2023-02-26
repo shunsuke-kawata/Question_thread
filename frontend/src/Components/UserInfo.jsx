@@ -1,11 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../css/UserInfo.css";
+import { useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
   const [name, setName] = useState(null);
   const [mail, setMail] = useState(null);
   const [infoFlag, setInfoFlag] = useState(false);
+
+  let navigate = useNavigate();
 
   var nickname = localStorage.getItem("nickname");
   var email = localStorage.getItem("email");
@@ -26,6 +29,16 @@ const UserInfo = () => {
     await setUserInfo();
   }, []);
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("nickname");
+    window.location.reload();
+  };
+
   return (
     <>
       <div className="infomation">
@@ -37,9 +50,15 @@ const UserInfo = () => {
             </div>
             <div className="hover_display">
               <h4 className="hover_label">ユーザーネーム</h4>
-              <h1 className="hover_element">{name}</h1>
+              <h3 className="hover_element">{name}</h3>
               <h4 className="hover_label">メールアドレス</h4>
-              <h1 className="hover_element">{mail}</h1>
+              <h3 className="hover_element">{mail}</h3>
+              <input
+                type="button"
+                className="route_from_info_button"
+                value="ログアウト"
+                onClick={handleLogout}
+              />
             </div>
           </>
         ) : (
@@ -50,9 +69,15 @@ const UserInfo = () => {
             </div>
             <div className="hover_display">
               <h4 className="hover_label">ユーザーネーム</h4>
-              <h1 className="hover_element">Guest</h1>
+              <h3 className="hover_element">Guest</h3>
               <h4 className="hover_label">メールアドレス</h4>
-              <h1 className="hover_element">Guest@mail.com</h1>
+              <h3 className="hover_element">Guest@mail.com</h3>
+              <input
+                type="button"
+                className="route_from_info_button"
+                value="ログイン"
+                onClick={handleLogin}
+              />
             </div>
           </>
         )}

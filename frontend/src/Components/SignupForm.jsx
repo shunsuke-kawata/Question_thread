@@ -31,13 +31,12 @@ const SignupForm = () => {
       if (flag) {
         await axios.post(process.env.REACT_APP_HOST_URL + "/signup", data);
       } else {
-        alert("email address format is not right");
+        alert("メールアドレスの形式が正しくありません");
         return;
       }
       reset();
       navigate("/login");
     } catch (err) {
-      reset();
       alert(err.response.data);
     } finally {
       console.log(data);

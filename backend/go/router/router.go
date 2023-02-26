@@ -36,9 +36,10 @@ type PostQuestion struct {
 }
 
 type PostComment struct {
-	Qid  string
-	Uid  string
-	Body string
+	Qid   string
+	Uid   string
+	Body  string
+	Email string
 }
 
 // 3000/signinからのpostを取得する
@@ -125,9 +126,10 @@ func GetCommentsRouter(c *gin.Context) {
 func CommentPostRouter(c *gin.Context) {
 	var postComment PostComment
 	c.BindJSON(&postComment)
-	newComment, err := model.NewCommentModel(postComment.Qid, postComment.Uid, postComment.Body)
+	newComment, err := model.NewCommentModel(postComment.Qid, postComment.Uid, postComment.Body, postComment.Email)
 
 	if err != nil {
+		c.JSON(400, err.Error())
 		fmt.Println(err)
 	} else {
 		fmt.Println(newComment)

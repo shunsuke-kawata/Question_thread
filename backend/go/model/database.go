@@ -149,18 +149,26 @@ func GetCommentsModel(parameter string) ([]Comment, error) {
 	questionID, _ := strconv.Atoi(parameter)
 	comments := []Comment{}
 	db.Debug().Find(&comments, "question_id = ?", questionID)
-	fmt.Println(comments)
 	return comments, nil
 }
 
-func NewCommentModel(qid string, uid string, body string) (*Comment, error) {
-	convertedQid, _ := strconv.ParseUint(qid, 10, 64)
-	convertedUid, _ := strconv.ParseUint(uid, 10, 64)
-	fmt.Println(convertedUid)
-	newComment := Comment{Body: body, QuestionID: uint(convertedQid)}
-	db.Debug().Create(&newComment)
+func NewCommentModel(qid string, uid string, body string, email string) (*Comment, error) {
+	user := &User{}
+	db.Debug().Select("id").Where("email=?", email).Find(&user)
+	if user.ID == 0 {
+		fmt.Println(111111)
+		err := errors.New("not logined user")
+		return nil, err
+	} else {
+		fmt.Println(222222)
+		convertedQid, _ := strconv.ParseUint(qid, 10, 64)
+		convertedUid, _ := strconv.ParseUint(uid, 10, 64)
+		fmt.Println(convertedUid)
+		newComment := Comment{Body: body, QuestionID: uint(convertedQid)}
+		db.Debug().Create(&newComment)
 
-	return &newComment, nil
+		return &newComment, nil
+	}
 
 }
 

@@ -43,7 +43,7 @@ const LoginForm = () => {
             placeholder="有効なメールアドレスを入力してください"
             type="email"
             {...register("email", {
-              required: "email is required field",
+              required: "メールアドレスが未入力です",
             })}
           />
           <p className="error-sentence">{errors.email?.message}</p>
@@ -56,7 +56,7 @@ const LoginForm = () => {
             type="password"
             {...register("password", {
               minLength: 6,
-              required: "password is required field",
+              required: "パスワードが未入力です",
             })}
           />
           <p className="error-sentence">{errors.password?.message}</p>

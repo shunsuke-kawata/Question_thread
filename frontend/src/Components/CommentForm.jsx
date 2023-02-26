@@ -37,7 +37,7 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
           minRows={2}
           size="large"
           placeholder="質問の回答・コメントを入力してください"
-          {...register("body", { required: "body is required field" })}
+          {...register("body", { required: "本文が未入力です" })}
         />
         <p className="error-sentence">{errors.body?.message}</p>
         <Button

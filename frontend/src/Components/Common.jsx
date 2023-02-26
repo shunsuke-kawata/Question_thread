@@ -4,7 +4,7 @@ import Menubar from "./Menubar";
 import { Drawer } from "@material-ui/core";
 import { useState } from "react";
 
-const Common = ({ dummyUser }) => {
+const Common = () => {
   const [menubarflag, setMenubarFlag] = useState(false);
   return (
     <>

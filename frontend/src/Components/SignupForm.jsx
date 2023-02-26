@@ -55,7 +55,7 @@ const SignupForm = () => {
             label="メールアドレス"
             placeholder="有効なメールアドレスを入力してください"
             type="email"
-            {...register("email", { required: "email is required field" })}
+            {...register("email", { required: "メールアドレスが未入力です" })}
           />
           <p className="error-sentence">{errors.email?.message}</p>
           <TextField
@@ -65,7 +65,7 @@ const SignupForm = () => {
             label="ニックネーム"
             placeholder="ニックネームを入力してください"
             {...register("nickname", {
-              required: "nickname is required field",
+              required: "ニックネームが未入力です",
             })}
           />
           <p className="error-sentence">{errors.nickname?.message}</p>
@@ -78,7 +78,7 @@ const SignupForm = () => {
             type="password"
             {...register("password", {
               minLength: 6,
-              required: "password is required field",
+              required: "パスワードが未入力です",
             })}
           />
           <p className="error-sentence">{errors.password?.message}</p>
@@ -91,7 +91,7 @@ const SignupForm = () => {
             type="password"
             {...register("confirmPassword", {
               minLength: 6,
-              required: "confirmPassword is required field",
+              required: "確認用パスワードが未入力です",
             })}
           />
           <Button

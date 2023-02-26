@@ -41,7 +41,7 @@ const QuestionForm = () => {
               label="タイトル"
               placeholder="質問のタイトルを入力してください"
               type="text"
-              {...register("title", { required: "title is required field" })}
+              {...register("title", { required: "タイトルが未入力です" })}
             />
             <p className="error-sentence">{errors.title?.message}</p>
           </div>
@@ -49,7 +49,7 @@ const QuestionForm = () => {
             className="questionBody"
             minRows={3}
             placeholder="質問の内容を入力してください"
-            {...register("body", { required: "body is required field" })}
+            {...register("body", { required: "本文が未入力です" })}
           />
           <p className="error-sentence">{errors.body?.message}</p>
           <Button

@@ -94,6 +94,7 @@ const SignupForm = () => {
               required: "確認用パスワードが未入力です",
             })}
           />
+          <p className="error-sentence">{errors.confirmPassword?.message}</p>
           <Button
             id="signupButton"
             color="primary"

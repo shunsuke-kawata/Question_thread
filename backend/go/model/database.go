@@ -73,12 +73,12 @@ func SignupModel(email string, nickname string, password string) (*User, error) 
 	signinUser := User{}
 	db.Debug().Where("email = ?", email).First(&signinUser)
 	if signinUser.ID != 0 {
-		err := errors.New("A user with the same address has already been registered.")
+		err := errors.New("このメールアドレスは既に登録されています")
 		return nil, err
 	}
 	encryptPw, err := crypt.PasswordEncrypt(password)
 	if err != nil {
-		err := errors.New("An error occurred while encrypting the password.")
+		err := errors.New("暗号化の途中でエラーが発生しました")
 		return nil, err
 	}
 
@@ -98,7 +98,7 @@ func LoginModel(email string, password string) (*User, error) {
 	fmt.Println(loginUser.Email)
 	fmt.Println(loginUser.Password)
 	if loginUser.ID == 0 {
-		err := errors.New("User with matching email address does not exist.")
+		err := errors.New("このメールアドレスは登録されていません")
 		return nil, err
 	} else {
 		fmt.Println("user exists")
@@ -106,7 +106,7 @@ func LoginModel(email string, password string) (*User, error) {
 
 	err := crypt.CompareHashAndPassword(loginUser.Password, password)
 	if err != nil {
-		err := errors.New("Password did not match.")
+		err := errors.New("パスワードが一致しません")
 		fmt.Println("Password did not match.", err)
 		return nil, err
 	} else {
@@ -122,7 +122,7 @@ func NewQuestionModel(title string, body string, email string) (*Question, error
 	user := &User{}
 	db.Debug().Select("id").Where("email=?", email).Find(&user)
 	if user.ID == 0 {
-		err := errors.New("not logined user")
+		err := errors.New("ログインしていないユーザーです")
 		return nil, err
 	} else {
 		newQuestion := Question{Title: title, Body: body, Comments: []Comment{}, UserID: user.ID}
@@ -157,7 +157,7 @@ func NewCommentModel(qid string, uid string, body string, email string) (*Commen
 	db.Debug().Select("id").Where("email=?", email).Find(&user)
 	if user.ID == 0 {
 		fmt.Println(111111)
-		err := errors.New("not logined user")
+		err := errors.New("ログインしていないユーザーです")
 		return nil, err
 	} else {
 		fmt.Println(222222)

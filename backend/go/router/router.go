@@ -49,7 +49,7 @@ func SignupRouter(c *gin.Context) {
 	c.BindJSON(&signupUser)
 	fmt.Println(signupUser.Email, signupUser.Nickname, signupUser.Password, signupUser.ConfirmPassword)
 	if signupUser.Password != signupUser.ConfirmPassword {
-		err := errors.New("password and password to confirm don't match")
+		err := errors.New("パスワードと確認用パスワードが一致していません")
 		c.JSON(400, err.Error())
 		fmt.Println(err)
 		return

@@ -35,6 +35,7 @@
 .route_from_info_button{
     margin-bottom: 5px;
     background-color: #3f51b5;
+    text-decoration:underline;
     border: none;
     color:white;
     font-size: 15px;

@@ -29,3 +29,9 @@
     position: absolute;
     right:10px;
 }
+
+#comment_error{
+    font-size: small;
+    padding-left: 40px;
+    margin: 0 0 10px 0;
+}

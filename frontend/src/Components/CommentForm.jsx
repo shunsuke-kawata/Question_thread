@@ -39,7 +39,9 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
           placeholder="質問の回答・コメントを入力してください"
           {...register("body", { required: "本文が未入力です" })}
         />
-        <p className="error-sentence">{errors.body?.message}</p>
+        <p id="comment_error" className="error-sentence">
+          {errors.body?.message}
+        </p>
         <Button
           id="commentPostButton"
           color="primary"

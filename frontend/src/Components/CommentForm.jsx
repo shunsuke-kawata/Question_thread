@@ -17,11 +17,11 @@ const CommentForm = ({ clickedQuestion, setShowFormFlag }) => {
       await axios.post(process.env.REACT_APP_HOST_URL + "/commentPost", data);
       reset();
       setShowFormFlag(false);
+      window.location.reload();
     } catch (err) {
       alert(err.response.data);
     } finally {
       console.log(data);
-      window.location.reload();
     }
   };
 

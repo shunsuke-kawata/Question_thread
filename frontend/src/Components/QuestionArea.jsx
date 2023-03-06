@@ -31,10 +31,10 @@ const QuestionArea = ({
       <>
         <IndexArea index={index} data={data} setIndex={setIndex} />
         <div id="noQuestionDiv">
-          <p>まだ質問が投稿されていません</p>
           <Link id="linkUrl" to="/newQuestion">
             質問を追加する
           </Link>
+          <p>まだ質問が投稿されていません</p>
         </div>
       </>
     );

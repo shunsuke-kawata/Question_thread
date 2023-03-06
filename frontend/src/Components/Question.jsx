@@ -27,6 +27,8 @@ const Question = ({
     console.log(datum.ID);
   };
 
+  var date = datum.CreatedAt.substr(0, 10);
+
   return (
     <div className="question_body" onClick={() => clickHandle()}>
       <div className="titleDiv">
@@ -38,7 +40,7 @@ const Question = ({
         <p className="questionElements">{datum.Body}</p>
       </div>
       <div className="infoDiv">
-        <p>{datum.CreatedAt}</p>
+        <p>{date}</p>
       </div>
     </div>
   );
